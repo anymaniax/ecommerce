@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+  	"dev": "NAME=DevServer nodemon index.js"
+  },
   "dependencies": {
-    "mongoose": "^4.6.6"
+    "body-parser": "^1.15.2",
+    "mongoose": "^4.6.6",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
   }
 }

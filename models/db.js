@@ -48,4 +48,4 @@ process.on('SIGTERM', function() {
 });
 
 // BRING IN YOUR SCHEMAS & MODELS
-Liens = require('./liens');
+Products = require('./products');

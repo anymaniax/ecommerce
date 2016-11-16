@@ -1,11 +1,8 @@
-var mongoose = require('mongoose');
-var gracefulShutdown;
+let mongoose = require('mongoose');
+let config   = require('../config/db')
+let gracefulShutdown;
 
-var dbURI = 'mongodb://localhost:27000/db_product';
-if (process.env.NODE_ENV === 'production') {
-    dbURI = process.env.MONGOLAB_URI;
-}
-
+let dbURI = config.uri;
 mongoose.Promise = global.Promise;
 //Connexion à mongoDB
 mongoose.connect(dbURI);

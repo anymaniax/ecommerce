@@ -1,6 +1,4 @@
 node_modules/
-<<<<<<< HEAD
 *.zip
 .DS_Store
-=======
->>>>>>> 3b7d7fe532f394d4d000a855517f9e155e143896
+*.log

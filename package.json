@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"dependencies": {
 		"eslint": "^3.10.1",
 		"eslint-config-airbnb": "^13.0.0",
@@ -7,4 +8,19 @@
 	"devDependencies": {
 		"eslint-plugin-jsx-a11y": "^3.0.1"
 	}
+=======
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "test": "nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.8"
+  }
+>>>>>>> 3b7d7fe532f394d4d000a855517f9e155e143896
 }

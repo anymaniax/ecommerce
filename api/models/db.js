@@ -1,6 +1,8 @@
 let mongoose = require('mongoose')
 let config   = require('../config/db')
 
+mongoose.Promise = global.Promise;
+
 mongoose.connect(config.uri)
 
 mongoose.connection.on('connected', () => {

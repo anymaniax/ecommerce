@@ -1,0 +1,38 @@
+{
+	"products": [{ 
+		"_id": "5823ae3e3fd75b24ef64e323",
+		"nom": "PS4 500 Go Slim",
+		"desc": "Un modèle 30% plus fin et 16% plus léger que la PS4 d'origine",
+		"stock": 10,
+		"thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51x2uufH6SL._SL1000_.jpg",
+		"__v": 0,
+		"cat": [
+			"gaming"
+		],
+		"tags": [],
+		"updated": "2016-11-09T23:16:14.954Z",
+		"ratings": [],
+		"price": {
+			"currency": "eur",
+			"value": 279
+		}
+	}],
+	"details": { 
+		"_id": "5823ae3e3fd75b24ef64e323",
+		"nom": "PS4 500 Go Slim",
+		"desc": "Un modèle 30% plus fin et 16% plus léger que la PS4 d'origine",
+		"stock": 10,
+		"thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51x2uufH6SL._SL1000_.jpg",
+		"__v": 0,
+		"cat": [
+			"gaming"
+		],
+		"tags": [],
+		"updated": "2016-11-09T23:16:14.954Z",
+		"ratings": [],
+		"price": {
+			"currency": "eur",
+			"value": 279
+		}
+	}
+}

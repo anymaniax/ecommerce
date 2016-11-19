@@ -70,3 +70,17 @@ module.exports.delProduct = (req, res) => {
 	})
 }
 
+module.exports.updateProduct = (req, res) => {
+	Product.update({ _id: req.params.id}, { $set: req.body }, (err, product) => {
+		if(err){
+			res.status(500)
+			return res.json('Could not update this product :(')
+		}
+
+		res.status(204)
+		res.json({
+			message: "Product updated with success",
+			product
+		})
+	})
+}

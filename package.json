@@ -1,0 +1,10 @@
+{
+	"dependencies": {
+		"eslint": "^3.10.1",
+		"eslint-config-airbnb": "^13.0.0",
+		"eslint-plugin-react": "^6.7.1"
+	},
+	"devDependencies": {
+		"eslint-plugin-jsx-a11y": "^3.0.1"
+	}
+}

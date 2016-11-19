@@ -1,9 +1,10 @@
 let router = require('express').Router()
 let ctrl = require('../controllers/produits')
 
-router.get('/products', ctrl.getAll)
-router.post('/products', ctrl.addProduct)
-router.get('/products/:id', ctrl.getById)
-router.delete('/products/:id', ctrl.delProduct)
+router.get('/', ctrl.getAll)
+router.post('/', ctrl.addProduct)
+router.get('/:id', ctrl.getById)
+router.delete('/:id', ctrl.delProduct)
+router.put('/:id', ctrl.updateProduct)
 
 module.exports = router;

@@ -10,6 +10,7 @@ const ProductListItem = (props) => {
 			<div className="card-block">
 				<h3 className="card-title">{props.product.nom}</h3>
 				<p><Link className="btn btn-primary" to={`/products/${props.product._id}`}>Détails</Link></p>
+				<p><a href="#add-to-cart" className="btn btn-primary" onClick={props.addToCart}>Ajouter au panier</a></p> 
 			</div>
 		</div>
 	)

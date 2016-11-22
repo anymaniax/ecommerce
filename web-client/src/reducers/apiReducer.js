@@ -1,4 +1,4 @@
-import { RECEIVE_PRODUCTS, RECEIVE_DETAILS } from '../actions/apiActions'
+import { RECEIVE_PRODUCTS, RECEIVE_DETAILS, RECEIVE_CATEGORIES } from '../actions/apiActions'
 
 import stub from '../../assets/stub.json'
 
@@ -18,6 +18,14 @@ function apiReducer(state = initialState, action){
 			let newState = Object.assign({}, state, {
 				details: action.details
 			})
+			return newState
+		}
+
+		case RECEIVE_CATEGORIES: {
+			let newState = Object.assign({}, state, {
+				cats: action.cats
+			})
+			console.log(newState)
 			return newState
 		}
 

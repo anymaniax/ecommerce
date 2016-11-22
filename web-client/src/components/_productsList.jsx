@@ -4,9 +4,9 @@ import ProductListItem from './_productListItem'
 
 class _ProductList extends React.Component {
 
-	click = (e, id) => {
-		e.preventDefault()
-		this.props.onProductClick(id)
+	addToCartHandler = (id) => {
+		console.log(id)
+		this.props.addToCart(id)
 	}
 
 	componentWillMount(){
@@ -20,7 +20,7 @@ class _ProductList extends React.Component {
 	render(){
 		let productMarkup = this.props.products.map((e) => {
 			return (
-				<ProductListItem key={e._id} product={e} clickHandler={this.click}/>
+				<ProductListItem key={e._id} product={e} addToCart={() => this.addToCartHandler(e._id)}/>
 			)
 		})
 

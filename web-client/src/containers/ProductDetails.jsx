@@ -5,7 +5,8 @@ import _ProductDetails from '../components/_productDetails'
 
 import { fetchById } from '../actions/apiActions'
 
-const mapStateToProps = ({details}) => {
+const mapStateToProps = (state) => {
+	let {details} = state.api
 	return {
 		details
 	}

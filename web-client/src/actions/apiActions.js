@@ -18,10 +18,10 @@ function receiveDetails(details){
 	}
 }
 
-export const RECEIVE_CATEGORES = 'receive categories'
+export const RECEIVE_CATEGORIES = 'receive categories'
 function receiveCategories(cats){
 	return {
-		type: RECEIVE_CATEGORES,
+		type: RECEIVE_CATEGORIES,
 		cats
 	}
 }
@@ -44,7 +44,7 @@ export function fetchById(id){
 
 export function fetchCats(){
 	return function(dispatch){
-		return fetch(`${conf.url}cats`)
+		return fetch(`${conf.url}cats/`)
 			.then(response => response.json())
 			.then(cats => dispatch(receiveCategories(cats)))
 	}

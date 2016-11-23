@@ -8,5 +8,4 @@ const reducers = combineReducers({
 	api: apiReducer
 })
 
-
 export default reducers

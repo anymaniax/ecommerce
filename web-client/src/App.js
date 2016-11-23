@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+import CatViewer from './containers/CatViewer'
+
 import { Link } from 'react-router'
 
 const App = ({children}) => {
@@ -12,6 +14,7 @@ const App = ({children}) => {
 				</div>
 			</nav>
 			<div className="container">
+				<CatViewer />
 				{children}
 			</div>
 		</div>

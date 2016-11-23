@@ -16,6 +16,6 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "test": "docker-compose up -d && nodemon api/index.js"
+    "test": "docker-compose up -d && nodemon api/index"
   }
 }

@@ -5,17 +5,23 @@ import ProductListItem from './_productListItem'
 class _ProductList extends React.Component {
 
 	addToCartHandler = (id) => {
-		console.log(id)
 		this.props.addToCart(id)
 	}
 
 	componentWillMount(){
-		this.props.fetchProducts()
+		let {catName} = this.props.params
+		if(catName){
+			this.props.fetchProductsFromCat(catName)
+		} else {
+			this.props.fetchProducts()
+		}
 	}
 
-	// componentWillReceiveProps(){
-	// 	console.log('props')
-	// }
+	componentWillReceiveProps(nextProps){
+		if(this.props.params.catName !== nextProps.params.catName){
+			this.props.fetchProductsFromCat(nextProps.params.catName)
+		}
+	}
 
 	render(){
 		let productMarkup = this.props.products.map((e) => {

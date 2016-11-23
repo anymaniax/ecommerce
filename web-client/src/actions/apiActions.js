@@ -49,3 +49,11 @@ export function fetchCats(){
 			.then(cats => dispatch(receiveCategories(cats)))
 	}
 }
+
+export function fetchProductsByCat(cat){
+	return function(dispatch){
+		return fetch(`${conf.url}cats/${cat}`)
+			.then(response => response.json())
+			.then(products => dispatch(receiveProducts(products))
+	}
+}

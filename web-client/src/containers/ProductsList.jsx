@@ -2,7 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { fetchById, fetchAll } from '../actions/apiActions'
+import { fetchById, fetchAll, fetchProductsByCat } from '../actions/apiActions'
 import { addToCart } from '../actions/cartActions'
 
 import _ProductList from '../components/_productsList'
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchProducts: () => {
 			dispatch(fetchAll())
+		},
+		fetchProductsFromCat: (cat) => {
+			dispatch(fetchProductsByCat(cat))	
 		},
 		addToCart: (id) => {
 			dispatch(addToCart(id))

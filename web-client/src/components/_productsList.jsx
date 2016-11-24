@@ -5,10 +5,6 @@ import ProductListItem from './_productListItem'
 
 class _ProductList extends React.Component {
 
-	addToCartHandler = (id) => {
-		this.props.addToCart(id)
-	}
-
 	componentWillMount(){
 		let {catName} = this.props.params
 		if(catName){
@@ -27,7 +23,7 @@ class _ProductList extends React.Component {
 	render(){
 		let productMarkup = this.props.products.map((e) => {
 			return (
-				<ProductListItem key={e._id} product={e} addToCart={() => this.addToCartHandler(e._id)}/>
+				<ProductListItem key={e._id} product={e} addToCart={() => this.props.addToCart(e._id)}/>
 			)
 		})
 

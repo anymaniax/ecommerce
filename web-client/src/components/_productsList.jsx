@@ -1,4 +1,5 @@
 import React from 'react'
+import FlipMove from 'react-flip-move'
 
 import ProductListItem from './_productListItem'
 
@@ -32,7 +33,9 @@ class _ProductList extends React.Component {
 
 		return (
 			<div>
-				{productMarkup}
+				<FlipMove easing="linear">
+					{productMarkup}
+				</FlipMove>
 			</div>
 		)
 	}

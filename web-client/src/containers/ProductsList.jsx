@@ -28,8 +28,8 @@ const mapDispatchToProps = (dispatch) => {
 		fetchProductsFromCat: (cat) => {
 			dispatch(fetchProductsByCat(cat))	
 		},
-		addToCart: (id) => {
-			dispatch(addToCart(id))
+		addToCart: (product) => {
+			dispatch(addToCart(product))
 		}
 	}
 }

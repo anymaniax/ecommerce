@@ -2,17 +2,16 @@ import React from 'react';
 import './App.css';
 
 import CatViewer from './containers/CatViewer'
+import CartViewer from './containers/CartViewer'
+import NavBar from './components/_navBar'
+
 
 import { Link } from 'react-router'
 
 const App = ({children}) => {
 	return (
 		<div>
-			<nav className="navbar navbar-light bg-faded navbar-fixed-top">
-				<div className="container-fluid">
-					<Link to='/' className="navbar-brand">Ecomm</Link>
-				</div>
-			</nav>
+			<NavBar />
 			<div className="container">
 				<CatViewer />
 				{children}

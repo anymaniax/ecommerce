@@ -23,13 +23,16 @@ class _ProductList extends React.Component {
 	render(){
 		let productMarkup = this.props.products.map((e) => {
 			return (
-				<ProductListItem key={e._id} product={e} addToCart={() => this.props.addToCart(e._id)}/>
+				<ProductListItem key={e._id} product={e} addToCart={() => this.props.addToCart(e)}/>
 			)
 		})
 
 		return (
 			<div>
-				<FlipMove easing="linear">
+				<FlipMove 
+				staggerDurationBy="30"
+            	duration={250}
+           		easing="linear">
 					{productMarkup}
 				</FlipMove>
 			</div>

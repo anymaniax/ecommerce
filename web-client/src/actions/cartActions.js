@@ -1,10 +1,13 @@
 import fetch from 'isomorphic-fetch'
 
+import conf from '../config/conf'
+
 export const ADD_TO_CART = 'add to cart'
-export function addToCart(id){
+export function addToCart(product){
+	console.log('product [action]', product)
 	return {
 		type: ADD_TO_CART,
-		id
+		product
 	}
 }
 

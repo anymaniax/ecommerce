@@ -2,6 +2,14 @@ import fetch from 'isomorphic-fetch'
 
 import conf from '../config/conf.json'
 
+export const PRODUCT_CREATION_SUCCESS = 'success product creation'
+function productCreationSuccess(link){
+	return {
+		type: PRODUCT_CREATION_SUCCESS,
+		link
+	}
+}
+
 export const RECEIVE_PRODUCTS = 'receive products'
 function receiveProducts(products){
 	return {
@@ -55,5 +63,15 @@ export function fetchProductsByCat(cat){
 		return fetch(`${conf.url}cats/${cat}`)
 			.then(response => response.json())
 			.then(products => dispatch(receiveProducts(products)))
+	}
+}
+
+export function createProduct(params){
+	return function(dispatch){
+		return fetch(`${conf.url}products`, {
+			method: 'POST',
+			body: JSON.stringify(params)
+		}).then(response => response.json())
+		.then(link => dispatch(productCreationSuccess(link)))
 	}
 }

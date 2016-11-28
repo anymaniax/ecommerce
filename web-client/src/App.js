@@ -3,7 +3,7 @@ import './App.css';
 
 import CatViewer from './containers/CatViewer'
 import CartViewer from './containers/CartViewer'
-import NavBar from './components/_navBar'
+import NavBar from './containers/NavBar'
 
 
 import { Link } from 'react-router'

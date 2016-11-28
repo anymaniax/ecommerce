@@ -16,7 +16,9 @@ class _ProductList extends React.Component {
 
 	componentWillReceiveProps(nextProps){
 		if(this.props.params.catName !== nextProps.params.catName){
-			this.props.fetchProductsFromCat(nextProps.params.catName)
+			if(nextProps.params.catName){
+				this.props.fetchProductsFromCat(nextProps.params.catName)
+			}
 		}
 	}
 

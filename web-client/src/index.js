@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
@@ -9,16 +9,28 @@ import App from './App';
 import {ProductsList, ProductDetails, ProductCreationForm} from './containers'
 import reducers from './reducers'
 import {fetchCats} from './actions'
+import {loadState, saveState} from './models/localStorage'
 
 import '../assets/bootstrap-4/css/bootstrap.css'
 
+const persistedstate = loadState()
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
 	reducers,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-	applyMiddleware(
-		thunkMiddleware
+	persistedstate,
+	composeEnhancers(
+		applyMiddleware(
+			thunkMiddleware
+		)
 	)
 )
+
+store.subscribe(() => {
+	saveState({
+		cart: store.getState().cart
+	})
+})
 
 store.dispatch(fetchCats())
 

@@ -22,10 +22,12 @@ function apiReducer(state = initialState, action){
 		}
 
 		case RECEIVE_CATEGORIES: {
-			let newState = Object.assign({}, state, {
-				cats: action.cats
-			})
-			return newState
+			if(!action.cats.err){
+				let newState = Object.assign({}, state, {
+					cats: action.cats
+				})
+				return newState
+			}
 		}
 		default:
 			return state

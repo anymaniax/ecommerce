@@ -34,5 +34,6 @@
 			"currency": "eur",
 			"value": 279
 		}
-	}
+	},
+	"cats": []
 }

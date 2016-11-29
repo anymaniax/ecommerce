@@ -5,8 +5,10 @@ import {removeFromCart, resetCart} from '../actions'
 import {_cartViewer} from '../components'
 
 const mapStateToProps = ({cart}) => {
+	const {items,price} = cart
 	return {
-		cart
+		items,
+		price
 	}
 }
 

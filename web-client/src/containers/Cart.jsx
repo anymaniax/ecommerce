@@ -5,8 +5,10 @@ import {_cart} from '../components'
 import {resetCart,removeFromCart} from '../actions'
 
 const mapStateToProps = ({cart}) => {
+	let {items,price} = cart
 	return {
-		cart
+		items,
+		price
 	}
 }
 
@@ -16,7 +18,6 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(resetCart())
 		},
 		remove: (cartId) => {
-			console.log('removing', cartId)
 			dispatch(removeFromCart(cartId))
 		}
 	}

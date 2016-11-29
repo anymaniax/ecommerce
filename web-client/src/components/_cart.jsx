@@ -7,8 +7,8 @@ const Item = (props) => {
 }
 
 const _cart = (props) => {
-	let price = props.cart.map(e => e.product.price.value * e.quantity).reduce((a, b) => a + b, 0)
-	let productsMarkup = props.cart.map(e => <Item quantity={e.quantity} cartId={e.cartId} nom={e.product.nom} delete={props.remove} />)
+	let price = props.items.map(e => e.product.price.value * e.quantity).reduce((a, b) => a + b, 0)
+	let productsMarkup = props.items.map(e => <Item quantity={e.quantity} cartId={e.cartId} nom={e.product.nom} delete={props.remove} />)
 	return (
 		<div>
 			<p>Prix total: {price + ' eur'}</p>

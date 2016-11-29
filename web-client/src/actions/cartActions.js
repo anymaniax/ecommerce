@@ -1,16 +1,18 @@
 export const ADD_TO_CART = 'add to cart'
-export function addToCart(product){
+export function addToCart(product, quantity = 1){
 	return {
 		type: ADD_TO_CART,
-		product
+		product,
+		quantity
 	}
 }
 
 export const REMOVE_FROM_CART = 'remove from cart'
-export function removeFromCart(id){
+export function removeFromCart(cartId, quantity = 1){
 	return {
 		type: REMOVE_FROM_CART,
-		id
+		cartId,
+		quantity
 	}
 }
 

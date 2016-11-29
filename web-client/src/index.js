@@ -6,7 +6,7 @@ import thunkMiddleware from 'redux-thunk'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import App from './App';
-import {ProductsList, ProductDetails, ProductCreationForm} from './containers'
+import {ProductsList, ProductDetails, ProductCreationForm, Cart} from './containers'
 import reducers from './reducers'
 import {fetchCats} from './actions'
 import {loadState, saveState} from './models/localStorage'
@@ -42,6 +42,7 @@ ReactDOM.render(
 				<IndexRoute component={ProductsList} />
 				<Route path="products/:id" component={ProductDetails} />
 				<Route path="cats/:catName" component={ProductsList} />
+				<Route path="cart" component={Cart} />
 			</Route>
 			<Route path="/productCreation">
 				<IndexRoute component={ProductCreationForm} />

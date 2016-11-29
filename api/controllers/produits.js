@@ -46,6 +46,7 @@ module.exports.addProduct = (req, res) => {
 	product.save((err, product) => {
 		if(err){
 			res.status(406)
+			console.log(err)
 			return res.json({
 				error: "Could not create this product"
 			})
@@ -53,6 +54,7 @@ module.exports.addProduct = (req, res) => {
 
 		res.status(201)
 		return res.send({
+			id: product._id,
 			link:  `http://localhost:${PORT}/api/v1/products/${product.id}`
 		})
 	})

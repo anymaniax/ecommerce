@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import ProductsList from './containers/ProductsList'
 import ProductDetails from './containers/ProductDetails'
+import ProductCreationForm from './containers/ProductCreationForm'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import '../assets/bootstrap-4/css/bootstrap.css'
 
@@ -12,6 +13,7 @@ import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 
+import {fetchCats} from './actions/apiActions'
 
 const store = createStore(
 	reducers,
@@ -21,6 +23,9 @@ const store = createStore(
 	)
 )
 
+store.dispatch(fetchCats())
+
+
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={browserHistory}>
@@ -28,6 +33,9 @@ ReactDOM.render(
 				<IndexRoute component={ProductsList} />
 				<Route path="products/:id" component={ProductDetails} />
 				<Route path="cats/:catName" component={ProductsList} />
+			</Route>
+			<Route path="/productCreation">
+				<IndexRoute component={ProductCreationForm} />
 			</Route>
 		</Router>
 	</Provider>,

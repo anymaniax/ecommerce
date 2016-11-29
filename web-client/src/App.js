@@ -1,12 +1,8 @@
 import React from 'react';
+import CatViewer from './containers/CatViewer'
+import NavBar from './containers/NavBar'
 import './App.css';
 
-import CatViewer from './containers/CatViewer'
-import CartViewer from './containers/CartViewer'
-import NavBar from './containers/NavBar'
-
-
-import { Link } from 'react-router'
 
 const App = ({children}) => {
 	return (

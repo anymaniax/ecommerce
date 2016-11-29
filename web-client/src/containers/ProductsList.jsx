@@ -1,8 +1,6 @@
-import React from 'react'
-
 import { connect } from 'react-redux'
 
-import { fetchById, fetchAll, fetchProductsByCat } from '../actions/apiActions'
+import { fetchAll, fetchProductsByCat } from '../actions/apiActions'
 import { addToCart } from '../actions/cartActions'
 
 import _ProductList from '../components/_productsList'

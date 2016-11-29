@@ -82,7 +82,7 @@ class _productCreationForm extends Component {
 			<div>
 				<NavBar hideDefault={true}>
 					<li className="nav-item">
-						<span className="nav-link">Liste des produits</span>
+						<Link to='/' className="nav-link">Liste des produits</Link>
 					</li>
 				</NavBar>
 				<div className="container container-fluid">

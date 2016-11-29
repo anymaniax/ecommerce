@@ -20,7 +20,7 @@ const _navBar = (props) => {
 					</li>}
 
 					{props.hideDefault || <li className="nav-item">
-						<Link to='/productCreation' className="nav-link">+</Link>
+						<Link to='/productCreation' className="nav-link">Ajouter un produit +</Link>
 					</li>}
 					{props.children}
 				</ul>

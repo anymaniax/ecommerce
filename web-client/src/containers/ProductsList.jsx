@@ -1,15 +1,9 @@
 import { connect } from 'react-redux'
 
-import { fetchAll, fetchProductsByCat } from '../actions/apiActions'
-import { addToCart } from '../actions/cartActions'
+import { fetchAll, fetchProductsByCat } from '../actions'
+import { addToCart } from '../actions'
 
-import _ProductList from '../components/_productsList'
-
-// const Landing = () => {
-// 	return (
-// 		<h2>Bienvenu sur l'accueil</h2>
-// 	)
-// }
+import {_productsList} from '../components'
 
 const mapStateToProps = (state) => {
 	let { products } = state.api
@@ -35,6 +29,6 @@ const mapDispatchToProps = (dispatch) => {
 const ProductsList = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(_ProductList)
+)(_productsList)
 
 export default ProductsList

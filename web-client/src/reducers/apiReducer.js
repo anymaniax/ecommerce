@@ -1,4 +1,4 @@
-import { RECEIVE_PRODUCTS, RECEIVE_DETAILS, RECEIVE_CATEGORIES } from '../actions/apiActions'
+import { RECEIVE_PRODUCTS, RECEIVE_DETAILS, RECEIVE_CATEGORIES } from '../actions'
 
 import stub from '../../assets/stub.json'
 

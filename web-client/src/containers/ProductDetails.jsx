@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 
-import _ProductDetails from '../components/_productDetails'
+import {_productDetails} from '../components'
 
-import { fetchById } from '../actions/apiActions'
+import { fetchById } from '../actions'
 
 const mapStateToProps = (state) => {
 	let {details} = state.api
@@ -22,6 +22,6 @@ const mapDispatchToProps = (dispatch) => {
 const ProductDetails = connect(
 	mapStateToProps, 
 	mapDispatchToProps
-)(_ProductDetails)
+)(_productDetails)
 
 export default ProductDetails

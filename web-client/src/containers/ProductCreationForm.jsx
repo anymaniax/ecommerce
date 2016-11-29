@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 
-import _productCreationForm from '../components/_productCreationForm'
+import {_productCreationForm} from '../components'
 
 import {createProduct} from '../actions'
 

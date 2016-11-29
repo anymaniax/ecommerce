@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
-import {fetchAll} from '../actions/apiActions'
-import _navBar from '../components/_navBar'
+import {fetchAll} from '../actions'
+import {_navBar} from '../components'
 
 const mapDispatchToProps = (dispatch) => {
 	return {

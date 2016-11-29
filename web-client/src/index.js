@@ -1,19 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import ProductsList from './containers/ProductsList'
-import ProductDetails from './containers/ProductDetails'
-import ProductCreationForm from './containers/ProductCreationForm'
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import '../assets/bootstrap-4/css/bootstrap.css'
-
-
+import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import { Provider } from 'react-redux'
-import reducers from './reducers'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
-import {fetchCats} from './actions/apiActions'
+import App from './App';
+import {ProductsList, ProductDetails, ProductCreationForm} from './containers'
+import reducers from './reducers'
+import {fetchCats} from './actions'
+
+import '../assets/bootstrap-4/css/bootstrap.css'
 
 const store = createStore(
 	reducers,

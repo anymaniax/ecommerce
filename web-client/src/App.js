@@ -1,6 +1,5 @@
 import React from 'react';
-import CatViewer from './containers/CatViewer'
-import NavBar from './containers/NavBar'
+import {CatViewer, NavBar} from './containers'
 import './App.css';
 
 

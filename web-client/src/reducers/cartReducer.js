@@ -1,4 +1,4 @@
-import { RESET_CART, ADD_TO_CART, REMOVE_FROM_CART } from '../actions/cartActions.js'
+import { RESET_CART, ADD_TO_CART, REMOVE_FROM_CART } from '../actions'
 
 export function cartReducer(state = [], action){
 	switch(action.type){

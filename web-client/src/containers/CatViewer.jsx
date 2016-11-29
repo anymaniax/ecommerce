@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 
-import {fetchCats} from '../actions/apiActions'
+import {fetchCats} from '../actions'
 
-import _catViewer from '../components/_catViewer'
+import {_catViewer} from '../components'
 
 const mapStateToProps = (state) => {
 	const {cats} = state.api

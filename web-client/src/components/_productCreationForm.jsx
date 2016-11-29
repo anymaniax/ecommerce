@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router'
 
-import NavBar from '../containers/NavBar'
-
-import ProductDetails from '../components/_productDetails'
+import {NavBar} from '../containers'
+import {_productDetails as ProductDetails} from '../components'
 
 class _productCreationForm extends Component {
 
@@ -76,7 +76,7 @@ class _productCreationForm extends Component {
 	render(){
 		let linkMarkup
 		if(this.props.id){
-			linkMarkup = <a href={'http://localhost:3000/products/' + this.props.id}>{'http://localhost:3000/products/' + this.props.id}</a>
+			linkMarkup = <Link to={'/products/' + this.props.id}>{'http://localhost:3000/products/' + this.props.id}</Link>
 		}
 		return (
 			<div>

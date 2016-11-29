@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 
-import {removeFromCart, resetCart} from '../actions/cartActions'
+import {removeFromCart, resetCart} from '../actions'
 
-import _cartViewer from '../components/_cartViewer'
+import {_cartViewer} from '../components'
 
 const mapStateToProps = ({cart}) => {
 	return {

@@ -1,0 +1,17 @@
+
+version: '2'
+
+services:
+  api:
+    image: api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 5000:5000
+      - 5858:5858
+    volumes:
+      - .:/usr/src/app
+    command: node --debug=5858 index.js

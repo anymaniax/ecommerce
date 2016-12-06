@@ -1,13 +1,16 @@
 let mongoose = require('mongoose')
+let mongoosastic = require('mongoosastic')
 
 let productSchema = new mongoose.Schema({
 	nom: {
 		type: String,
 		required: true,
-		unique: true
+		unique: true,
+		es_indexed: true
 	}, desc: {
 		type: String,
-		required: true
+		required: true,
+		es_indexed: true
 	}, price: {
 		currency: {
 			type: String,
@@ -32,5 +35,7 @@ let productSchema = new mongoose.Schema({
 		required: true
 	}
 })
+productSchema.plugin(mongoosastic)
 
-module.exports = mongoose.model('Product', productSchema)
+const Product = mongoose.model('Product', productSchema)
+module.exports = Product

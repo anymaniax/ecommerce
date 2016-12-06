@@ -68,6 +68,10 @@ arrify@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
+asap@~2.0.3:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.5.tgz#522765b50c3510490e52d7dcfe085ef9ba96958f"
+
 async@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/async/-/async-2.1.2.tgz#612a4ab45ef42a70cde806bad86ee6db047e8385"
@@ -270,6 +274,15 @@ ecdsa-sig-formatter@1.0.7:
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
+
+elasticsearch@12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/elasticsearch/-/elasticsearch-12.1.0.tgz#245c36f57fa1991db929dfc32aab4fa8841b860d"
+  dependencies:
+    chalk "^1.0.0"
+    forever-agent "^0.6.0"
+    lodash "^4.12.0"
+    promise "^7.1.1"
 
 encodeurl@~1.0.1:
   version "1.0.1"
@@ -499,6 +512,10 @@ flat-cache@^1.2.1:
     del "^2.0.2"
     graceful-fs "^4.1.2"
     write "^0.2.1"
+
+forever-agent@^0.6.0:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
 forwarded@~0.1.0:
   version "0.1.0"
@@ -748,6 +765,10 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+lodash.clonedeep@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+
 lodash.once@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
@@ -755,6 +776,10 @@ lodash.once@^4.0.0:
 lodash@^4.0.0, lodash@^4.14.0, lodash@^4.3.0:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.1.tgz#e75eaf17a34730c6491d9956f4d81f3a044f01bf"
+
+lodash@^4.12.0:
+  version "4.17.2"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -816,6 +841,13 @@ mongodb@2.2.11:
     es6-promise "3.2.1"
     mongodb-core "2.0.13"
     readable-stream "2.1.5"
+
+mongoosastic:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/mongoosastic/-/mongoosastic-4.2.1.tgz#ee0a9e41c84275712e22fb3459939c85c09d24d4"
+  dependencies:
+    elasticsearch "12.1.0"
+    lodash.clonedeep "4.5.0"
 
 mongoose:
   version "4.6.6"
@@ -969,6 +1001,12 @@ process-nextick-args@~1.0.6:
 progress@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
+
+promise@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
+  dependencies:
+    asap "~2.0.3"
 
 proxy-addr@~1.1.2:
   version "1.1.2"

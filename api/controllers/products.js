@@ -86,3 +86,30 @@ module.exports.updateProduct = (req, res) => {
 		})
 	})
 }
+
+module.exports.search = (req, res) => {
+	let {query} = req.params
+	console.log('query', query)
+	Product.search({
+		query_string: {
+			query
+		}
+	}, (err, results) => {
+		if(err){
+			console.log(err)
+			return res.status(500).json({
+				message: 'FDJKLSQFJQDLSMFJ'
+			})
+		}
+		if(results.hits){
+			if(results.hits.hits){
+				res.status(200)
+				return res.json({products: results.hits.hits})
+			}
+		}
+
+		return res.status(404).json({
+			message: 'No product found'
+		})
+	})
+}

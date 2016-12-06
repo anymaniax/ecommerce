@@ -14,6 +14,15 @@ const NAME = process.env.NAME || "e-commerce API"
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
+
+/**
+Custom solution to catch malformed JSON error
+**/
+app.use((err, req, res, next) => {
+	console.log(err.stack)
+	res.status(500).send('Something broke')
+})
+
 app.disable('x-powered-by')
 app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*")

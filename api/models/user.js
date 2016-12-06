@@ -46,14 +46,20 @@ let userSchema = new mongoose.Schema({
             required: true
         }
     },
+    /**
+    M, F, N
+    **/
     sex: {
         type: String,
         required: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: true
     },
+    /**
+    seller, admin, user
+    **/
     role: {
         type: String,
         required: true,

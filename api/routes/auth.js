@@ -1,7 +1,6 @@
 let router = require('express').Router()
 let ctrl = require('../controllers/auth')
 
-router.get('/', ctrl.auth)
-router.get('/verify', ctrl.checkToken)
+router.post('/', ctrl.auth)
 
 module.exports = router

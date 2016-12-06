@@ -7,8 +7,8 @@ let bcrypt = require('bcryptjs');
 const PORT = process.env.PORT || 5000
 
 module.exports.getAll = (req, res) => {
-    User.find((err, user) => {
-        if (!user) {
+    User.find((err, users) => {
+        if (!users) {
             res.status(404)
             res.json({
                 err: "No user found :("
@@ -21,14 +21,49 @@ module.exports.getAll = (req, res) => {
                 err: "An unexpect error happened"
             })
         }
-        return res.json(user)
+        let allUsers=[]
+        for(let user of users){
+            let ByUser={
+                _id: user._id,
+                lastname: user.lastname,
+                firstname: user.firstname,
+                username: user.username,
+                email: user.email,
+                sex: user.sex,
+                phone: user.phone,
+                address:
+                    { street: user.address.street,
+                        number: user.address.number,
+                        town: user.address.town,
+                        postalCode: user.address.postalCode,
+                        country: user.address.country }
+            }
+            allUsers.push(ByUser)
+        }
+        return res.json(allUsers)
     })
 }
 
 module.exports.getById = (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (user) {
-            return res.json(user)
+            let ByUser={
+                _id: user._id,
+                lastname: user.lastname,
+                firstname: user.firstname,
+                username: user.username,
+                email: user.email,
+                sex: user.sex,
+                phone: user.phone,
+                address:
+                    { street: user.address.street,
+                        number: user.address.number,
+                        town: user.address.town,
+                        postalCode: user.address.postalCode,
+                        country: user.address.country }
+            }
+            console.log(ByUser);
+            return res.json(ByUser)
         }
 
         if (err) {

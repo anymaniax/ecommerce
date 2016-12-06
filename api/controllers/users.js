@@ -73,7 +73,7 @@ module.exports.addUser = (req, res) => {
 
                         res.status(200)
                         return res.send({
-                            link: `http://localhost:${PORT}/api/v1/user/${user.id}`
+                            link: `http://localhost:${PORT}/api/v1/users/${user.id}`
                         })
                     })
                 });

@@ -23,7 +23,7 @@ module.exports.auth = (req, res) => {
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (err) throw err
                 if (isMatch) {
-                    let ByUser = {
+                    /**let ByUser = {
                         _id: user._id,
                         lastname: user.lastname,
                         firstname: user.firstname,
@@ -38,8 +38,8 @@ module.exports.auth = (req, res) => {
                             postalCode: user.address.postalCode,
                             country: user.address.country
                         }
-                    }
-                    let token = jwt.sign(ByUser, SuperSecret, {
+                    }**/
+                    let token = jwt.sign(user, SuperSecret, {
                         expiresIn: "24h"
                     });
 

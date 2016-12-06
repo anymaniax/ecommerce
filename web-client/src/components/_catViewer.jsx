@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Link } from 'react-router' 
 
+let i = 0
 class _catViewer extends React.Component {
 
 	componentWillMount(){
@@ -10,7 +11,7 @@ class _catViewer extends React.Component {
 
 	render(){
 		let cats = this.props.cats || []
-		let catsMarkup = cats.map(e => <Link to={`/cats/${e}`} className="btn btn-primary">{`${e}`}</Link>)
+		let catsMarkup = cats.map(e => <Link key={i++} to={`/cats/${e}`} className="btn btn-primary">{`${e}`}</Link>)
 		return (
 			<div>
 			{catsMarkup}

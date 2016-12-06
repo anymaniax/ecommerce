@@ -9,7 +9,7 @@ module.exports.auth = (req, res) => {
         $or: [{
             'username': req.body.username
         }, {
-            'email': req.body.email
+            'email': req.body.username
         }]
     }, (err, user) => {
         if (err) throw err;

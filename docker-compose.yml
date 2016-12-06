@@ -1,6 +1,21 @@
+
 version: '2'
+
 services:
-  db:
+  api:
+    image: api:latest
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      NODE_ENV: production
+    volumes: 
+      - ./api/:/usr/src/app
     ports:
-    - "27017:27017"
+      - 5000:5000
+    links:
+      - db
+  db:
     image: mongo
+    ports:
+      - 27017:27017

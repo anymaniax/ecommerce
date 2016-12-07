@@ -98,16 +98,8 @@ module.exports.search = (req, res) => {
 		query
 	} = req.params
 	Product.search({
-		"query": {
-			"fuzzy": {
-				"user": {
-					"value": `${query}`,
-					"boost": 1.0,
-					"fuzziness": 2,
-					"prefix_length": 0,
-					"max_expansions": 100
-				}
-			}
+		"query_string": {
+			"query": `${query}~2`
 		}
 	}, (err, results) => {
 		if (err) {

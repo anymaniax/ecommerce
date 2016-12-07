@@ -97,7 +97,6 @@ module.exports.search = (req, res) => {
 	let {
 		query
 	} = req.params
-	console.log('query', query)
 	Product.search({
 		"query": {
 			"fuzzy": {
@@ -112,9 +111,8 @@ module.exports.search = (req, res) => {
 		}
 	}, (err, results) => {
 		if (err) {
-			console.log(err)
 			return res.status(500).json({
-				message: 'FDJKLSQFJQDLSMFJ'
+				message: 'No product found'
 			})
 		}
 		if (results.hits) {

@@ -7,4 +7,5 @@ RUN cd /tmp && npm install --production
 RUN mkdir -p /usr/src/app && mv /tmp/node_modules /usr/src
 WORKDIR /usr/src/app
 EXPOSE 5000
+ENV DEBUG=0
 CMD node index.js

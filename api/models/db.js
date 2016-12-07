@@ -1,6 +1,10 @@
 let mongoose = require('mongoose')
-let config   = require('../config/db')
-let auth  = require('../config/auth')
+let config
+if (process.env.DEBUG==1) {
+	config = require('../config/dev')
+} else {
+	config = require('../config/prod')
+}
 
 mongoose.Promise = global.Promise;
 
@@ -39,8 +43,8 @@ process.on('SIGTERM', () => {
 	})
 })
 
-SuperSecret = auth.secret
-Salt = auth.salt
+SuperSecret = config.secret
+Salt = config.salt
 
 //Schemas
 User = require('./user')

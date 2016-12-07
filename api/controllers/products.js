@@ -98,8 +98,8 @@ module.exports.search = (req, res) => {
 		query
 	} = req.params
 	Product.search({
-		"query_string": {
-			"query": `${query}~2`
+		query_string: {
+			query: `${query}~2`
 		}
 	}, (err, results) => {
 		if (err) {
@@ -108,7 +108,7 @@ module.exports.search = (req, res) => {
 			})
 		}
 		if (results.hits) {
-			if (results.hits.hits) {
+			if (results.hits.total != 0) {
 				res.status(200)
 				return res.json({
 					products: results.hits.hits

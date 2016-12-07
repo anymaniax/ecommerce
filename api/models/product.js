@@ -5,12 +5,10 @@ let productSchema = new mongoose.Schema({
 	nom: {
 		type: String,
 		required: true,
-		unique: true,
-		es_indexed: true
+		unique: true
 	}, desc: {
 		type: String,
-		required: true,
-		es_indexed: true
+		required: true
 	}, price: {
 		currency: {
 			type: String,
@@ -38,4 +36,7 @@ let productSchema = new mongoose.Schema({
 productSchema.plugin(mongoosastic)
 
 const Product = mongoose.model('Product', productSchema)
+
+Product.synchronize()
+
 module.exports = Product

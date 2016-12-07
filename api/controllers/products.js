@@ -92,7 +92,7 @@ module.exports.search = (req, res) => {
 	console.log('query', query)
 	Product.search({
 		query_string: {
-			query
+			query: `*${query}*`
 		}
 	}, (err, results) => {
 		if(err){

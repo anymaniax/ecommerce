@@ -3,20 +3,20 @@ require('../models/db')
 let Product = require('../models/product')
 
 const PORT = process.env.PORT || 5000
-// TODO:
-// -> Apply point 7 from 
-// http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/
-// -> Handler errors
+	// TODO:
+	// -> Apply point 7 from 
+	// http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/
+	// -> Handler errors
 module.exports.getAll = (req, res) => {
 	Product.find((err, products) => {
-		if(!products){
+		if (!products) {
 			res.status(404)
 			res.json({
 				err: "No products found :("
 			})
 		}
 
-		if(err){
+		if (err) {
 			res.status(500)
 			return res.json({
 				err: "An unexpect error happened"
@@ -28,11 +28,11 @@ module.exports.getAll = (req, res) => {
 
 module.exports.getById = (req, res) => {
 	Product.findById(req.params.id, (err, product) => {
-		if(product){
+		if (product) {
 			return res.json(product)
 		}
-		
-		if(err){
+
+		if (err) {
 			res.status(404)
 			return res.json({
 				error: "No product found for that id."
@@ -44,7 +44,7 @@ module.exports.getById = (req, res) => {
 module.exports.addProduct = (req, res) => {
 	let product = Product(req.body)
 	product.save((err, product) => {
-		if(err){
+		if (err) {
 			res.status(406)
 			console.log(err)
 			return res.json({
@@ -55,14 +55,16 @@ module.exports.addProduct = (req, res) => {
 		res.status(201)
 		return res.send({
 			id: product._id,
-			link:  `http://localhost:${PORT}/api/v1/products/${product.id}`
+			link: `http://localhost:${PORT}/api/v1/products/${product.id}`
 		})
 	})
 }
 
 module.exports.delProduct = (req, res) => {
-	Product.findOneAndRemove({'_id': req.params.id}, (err, product) => {
-		if(err){
+	Product.findOneAndRemove({
+		'_id': req.params.id
+	}, (err, product) => {
+		if (err) {
 			res.status(500)
 			return res.json('Could not remove this product :(')
 		}
@@ -73,8 +75,12 @@ module.exports.delProduct = (req, res) => {
 }
 
 module.exports.updateProduct = (req, res) => {
-	Product.update({ _id: req.params.id}, { $set: req.body }, (err, product) => {
-		if(err){
+	Product.update({
+		_id: req.params.id
+	}, {
+		$set: req.body
+	}, (err, product) => {
+		if (err) {
 			res.status(500)
 			return res.json('Could not update this product :(')
 		}
@@ -88,23 +94,35 @@ module.exports.updateProduct = (req, res) => {
 }
 
 module.exports.search = (req, res) => {
-	let {query} = req.params
+	let {
+		query
+	} = req.params
 	console.log('query', query)
 	Product.search({
-		query_string: {
-			query: `*${query}*`
+		"query": {
+			"fuzzy": {
+				"user": {
+					"value": `${query}`,
+					"boost": 1.0,
+					"fuzziness": 2,
+					"prefix_length": 0,
+					"max_expansions": 100
+				}
+			}
 		}
 	}, (err, results) => {
-		if(err){
+		if (err) {
 			console.log(err)
 			return res.status(500).json({
 				message: 'FDJKLSQFJQDLSMFJ'
 			})
 		}
-		if(results.hits){
-			if(results.hits.hits){
+		if (results.hits) {
+			if (results.hits.hits) {
 				res.status(200)
-				return res.json({products: results.hits.hits})
+				return res.json({
+					products: results.hits.hits
+				})
 			}
 		}
 

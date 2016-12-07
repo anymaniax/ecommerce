@@ -15,7 +15,13 @@ services:
       - 5000:5000
     links:
       - db
+      - es
   db:
     image: mongo
     ports:
       - 27017:27017
+  es:
+    image: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300

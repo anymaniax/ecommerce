@@ -1,5 +1,11 @@
 let mongoose = require('mongoose')
 let mongoosastic = require('mongoosastic')
+let config
+if (process.env.DEBUG==1) {
+	config = require('../config/dev')
+} else {
+	config = require('../config/prod')
+}
 
 let productSchema = new mongoose.Schema({
 	nom: {
@@ -33,7 +39,11 @@ let productSchema = new mongoose.Schema({
 		required: true
 	}
 })
-productSchema.plugin(mongoosastic)
+productSchema.plugin(mongoosastic, {
+  hosts: [
+    config.es
+  ]
+})
 
 const Product = mongoose.model('Product', productSchema)
 

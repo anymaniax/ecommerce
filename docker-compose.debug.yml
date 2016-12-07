@@ -6,3 +6,8 @@ services:
     image: mongo
     ports:
       - 27017:27017
+   es:
+    image: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300

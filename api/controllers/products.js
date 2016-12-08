@@ -98,9 +98,18 @@ module.exports.search = (req, res) => {
 		query
 	} = req.params
 	Product.search({
-		query_string: {
-			query: `${query}~2`
+		//`${query}~2`
+		"query": {
+			"multi_match": {
+				"query": query,
+				"fields": ["nom", "desc", "cat", "tag"],
+				"fuzziness": 2
+			}
 		}
+	},{
+		from: 0,
+		size: 1000,
+		hydrate: true
 	}, (err, results) => {
 		if (err) {
 			return res.status(500).json({

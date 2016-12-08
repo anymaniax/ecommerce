@@ -7,7 +7,7 @@ services:
     ports:
       - 27017:27017
    es:
-    image: elasticsearch
+    image: elasticsearch:2.4
     ports:
       - 9200:9200
       - 9300:9300

@@ -89,7 +89,6 @@ module.exports.updateProduct = (req, res) => {
 
 module.exports.search = (req, res) => {
 	let {query} = req.params
-	console.log('query', query)
 	Product.search({
 		query_string: {
 			query: `*${query}*`

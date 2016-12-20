@@ -44,13 +44,13 @@ module.exports.auth = (req, res) => {
                     });
 
                     res.json({
-                        sucess: true,
+                        success: true,
                         message: 'Enjoy your token!',
                         token: token
                     });
                 } else {
                     res.json({
-                        sucess: false,
+                        success: false,
                         message: 'Authentication failed.'
                     })
                 }
@@ -65,7 +65,7 @@ module.exports.checkToken = (req, res, next) => {
         jwt.verify(token, SuperSecret, (err, decoded) => {
             if (err) {
                 return res.json({
-                    sucess: false,
+                    success: false,
                     message: 'Failed to Authentication token.'
                 });
 

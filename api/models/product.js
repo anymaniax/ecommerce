@@ -37,6 +37,4 @@ productSchema.plugin(mongoosastic)
 
 const Product = mongoose.model('Product', productSchema)
 
-Product.synchronize()
-
 module.exports = Product

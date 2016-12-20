@@ -101,6 +101,7 @@ module.exports.addUser = (req, res) => {
                     user.save((err, user) => {
                         if (err) {
                             res.status(406)
+                            console.log(err)
                             return res.json({
                                 error: "Could not create this user"
                             })

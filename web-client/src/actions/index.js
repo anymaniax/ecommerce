@@ -16,3 +16,9 @@ export {RECEIVE_PRODUCTS,
 		fetchById,
 		fetchCats,
 		fetchProductsByCat} from './apiActions'
+
+export {LOGIN_SUCCESS,
+		LOGIN_FAILURE,
+		fetchToken,
+		logout,
+		LOGOUT} from './authActions'

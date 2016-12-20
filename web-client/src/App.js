@@ -8,7 +8,6 @@ const App = ({children}) => {
 		<div>
 			<NavBar />
 			<div className="container">
-				<CatViewer />
 				{children}
 			</div>
 		</div>

@@ -2,6 +2,7 @@ import React from 'react'
 import FlipMove from 'react-flip-move'
 
 import ProductListItem from './_productListItem'
+import {CatViewer} from '../containers'
 
 class _ProductList extends React.Component {
 
@@ -31,6 +32,7 @@ class _ProductList extends React.Component {
 
 		return (
 			<div>
+				<CatViewer />
 				<FlipMove 
 				staggerDurationBy="30"
             	duration={250}

@@ -53,12 +53,13 @@ module.exports.auth = (req, res) => {
                     res.json({
                         success: false,
                         message: 'Authentication failed.'
-                    })
+                    });
                 }
             });
         }
     });
 }
+
 
 module.exports.checkToken = (req, res, next) => {
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -79,6 +80,16 @@ module.exports.checkToken = (req, res, next) => {
         return res.status(403).send({
             success: false,
             message: 'No token provided.'
-        })
+        });
     }
+}
+
+module.exports.requireAdmin = (req, res, next) => {
+    if(!req.decode || req.decode.role !== 'admin'){
+        return res.json({
+            success: false,
+            message: 'This route can only be accessed by an administrator'
+        });
+    }
+    next();
 }

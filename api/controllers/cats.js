@@ -30,12 +30,27 @@ module.exports.getAll = (req, res) => {
 }
 
 module.exports.addCat = (req, res) => {
-	let cat = Cat(req.body)
-	cat.save((err, cat) => {
-		res.status(201)
-		res.send({
-			link: `http://localhost:${PORT}/api/v1/cats/${cat.nom}`
-		})
+	console.log(req.body.nom);
+	Cat.findOne({'nom':req.body.nom},(err,cats) =>{
+		if (err) {
+			res.status(500)
+			return res.json({
+				err: "An unexpected error happened"
+			})
+		}
+		if(cats){
+			return res.json({
+				error: "Category already use"
+			})
+		} else {
+			let cat = Cat(req.body)
+			cat.save((err,cat)=>{
+				res.status(201)
+				res.send({
+					link: `http://localhost:${PORT}/api/v1/cats/${cat.nom}`
+				})
+			})
+		}
 	})
 }
 

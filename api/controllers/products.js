@@ -42,21 +42,32 @@ module.exports.getById = (req, res) => {
 }
 
 module.exports.addProduct = (req, res) => {
-	let product = Product(req.body)
-	product.save((err, product) => {
-		if (err) {
-			res.status(406)
-			console.log(err)
+	Product.findOne({
+		'nom': req.body.nom
+	}, (err, product) => {
+		if (product) {
 			return res.json({
-				error: "Could not create this product"
+				error: "Product already use."
+			})
+		} else {
+			let product = Product(req.body)
+
+			product.save((err, product) => {
+				if (err) {
+					res.status(406)
+					console.log(err)
+					return res.json({
+						error: "Could not create this product"
+					})
+				}
+
+				res.status(201)
+				return res.send({
+					id: product._id,
+					link: `http://localhost:${PORT}/api/v1/products/${product.id}`
+				})
 			})
 		}
-
-		res.status(201)
-		return res.send({
-			id: product._id,
-			link: `http://localhost:${PORT}/api/v1/products/${product.id}`
-		})
 	})
 }
 
@@ -105,8 +116,8 @@ module.exports.search = (req, res) => {
 				"fields": ["nom", "desc", "cat", "tag"],
 				"fuzziness": 2
 			}
-		}
-	},{
+		},
+	}, {
 		from: 0,
 		size: 1000,
 		hydrate: true

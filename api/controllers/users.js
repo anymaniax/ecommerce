@@ -97,6 +97,7 @@ module.exports.addUser = (req, res) => {
             bcrypt.genSalt(Salt, function (err, salt) {
                 bcrypt.hash(password, salt, function (err, hash) {
                     req.body.password = hash
+                    req.body.role = "user";
                     let user = User(req.body)
                     user.save((err, user) => {
                         if (err) {

@@ -21,9 +21,9 @@ module.exports.getAll = (req, res) => {
                 err: "An unexpect error happened"
             })
         }
-        let allUsers=[]
-        for(let user of users){
-            let ByUser={
+        let allUsers = []
+        for (let user of users) {
+            let ByUser = {
                 _id: user._id,
                 lastname: user.lastname,
                 firstname: user.firstname,
@@ -31,12 +31,13 @@ module.exports.getAll = (req, res) => {
                 email: user.email,
                 sex: user.sex,
                 phone: user.phone,
-                address:
-                    { street: user.address.street,
-                        number: user.address.number,
-                        town: user.address.town,
-                        postalCode: user.address.postalCode,
-                        country: user.address.country }
+                address: {
+                    street: user.address.street,
+                    number: user.address.number,
+                    town: user.address.town,
+                    postalCode: user.address.postalCode,
+                    country: user.address.country
+                }
             }
             allUsers.push(ByUser)
         }
@@ -47,7 +48,7 @@ module.exports.getAll = (req, res) => {
 module.exports.getById = (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (user) {
-            let ByUser={
+            let ByUser = {
                 _id: user._id,
                 lastname: user.lastname,
                 firstname: user.firstname,
@@ -55,12 +56,13 @@ module.exports.getById = (req, res) => {
                 email: user.email,
                 sex: user.sex,
                 phone: user.phone,
-                address:
-                    { street: user.address.street,
-                        number: user.address.number,
-                        town: user.address.town,
-                        postalCode: user.address.postalCode,
-                        country: user.address.country },
+                address: {
+                    street: user.address.street,
+                    number: user.address.number,
+                    town: user.address.town,
+                    postalCode: user.address.postalCode,
+                    country: user.address.country
+                },
                 role: user.role
             }
             console.log(ByUser);
@@ -77,11 +79,13 @@ module.exports.getById = (req, res) => {
 }
 
 module.exports.addUser = (req, res) => {
-    User.findOne({$or:[{
-        'username': req.body.username
-    }, {
-        'email': req.body.email
-    }]}, (err, user) => {
+    User.findOne({
+        $or: [{
+            'username': req.body.username
+        }, {
+            'email': req.body.email
+        }]
+    }, (err, user) => {
         if (user) {
             console.log(user);
             if (user.username == req.body.username) {
@@ -142,7 +146,19 @@ module.exports.updateUser = (req, res) => {
             User.update({
                 '_id': req.params.id
             }, {
-                $set: req.body
+                $set: {
+                    'lastname': req.body.lastname,
+                    'firstname': req.body.firstname,
+                    'address': {
+                        'street': req.body.address.street,
+                        'number': req.body.address.number,
+                        'town': req.body.address.town,
+                        'postalCode': req.body.address.postalCode,
+                        'country': req.body.address.country
+                    },
+                    'sex': req.body.sex,
+                    'phone': req.body.phone,
+                }
             }, (err, user) => {
                 if (err) {
                     res.status(500)
@@ -156,7 +172,7 @@ module.exports.updateUser = (req, res) => {
                     user
                 })
             })
-        } else if (user.username != req.body.username) {
+        } else if (user.username != req.body.username && user.email == req.body.email) {
             User.findOne({
                 'username': req.body.username
             }, (err, user) => {
@@ -168,7 +184,114 @@ module.exports.updateUser = (req, res) => {
                     User.update({
                         '_id': req.params.id
                     }, {
-                        $set: req.body
+                        $set: {
+                            'username': req.body.username,
+                            'lastname': req.body.lastname,
+                            'firstname': req.body.firstname,
+                            'address': {
+                                'street': req.body.address.street,
+                                'number': req.body.address.number,
+                                'town': req.body.address.town,
+                                'postalCode': req.body.address.postalCode,
+                                'country': req.body.address.country
+                            },
+                            'sex': req.body.sex,
+                            'phone': req.body.phone,
+                        }
+                    }, (err, user) => {
+                        if (err) {
+                            res.status(500)
+                            return res.json({
+                                error: 'Could not update this user'
+                            })
+                        }
+                        res.status(200)
+                        return res.json({
+                            message: "User updated with success",
+                            user
+                        })
+                    })
+                }
+            })
+        } else if (user.email != req.body.email && user.username == req.body.username) {
+            console.log("test");
+            User.findOne({
+                'email': req.body.email
+            }, (err, user) => {
+                if (user) {
+                    return res.json({
+                        error: "Email already use."
+                    })
+                } else {
+                    User.update({
+                        '_id': req.params.id
+                    }, {
+                        $set: {
+                            'email': req.body.email,
+                            'lastname': req.body.lastname,
+                            'firstname': req.body.firstname,
+                            'address': {
+                                'street': req.body.address.street,
+                                'number': req.body.address.number,
+                                'town': req.body.address.town,
+                                'postalCode': req.body.address.postalCode,
+                                'country': req.body.address.country
+                            },
+                            'sex': req.body.sex,
+                            'phone': req.body.phone,
+                        }
+                    }, (err, user) => {
+                        if (err) {
+                            res.status(500)
+                            return res.json({
+                                error: 'Could not update this user'
+                            })
+                        }
+                        res.status(200)
+                        return res.json({
+                            message: "User updated with success",
+                            user
+                        })
+                    })
+                }
+            })
+        } else if (user.email != req.body.email && user.username != req.body.username) {
+            User.findOne({
+                $or: [{
+                    'username': req.body.username
+                }, {
+                    'email': req.body.email
+                }]
+            }, (err, user) => {
+                if (user) {
+                    if (user.username == req.body.username) {
+                        return res.json({
+                            error: "Username already use."
+                        })
+                    } else {
+                        return res.json({
+                            error: "Email already use."
+                        })
+                    }
+                } else {
+                    User.update({
+                        '_id': req.params.id
+                    }, {
+                        $set: {
+                            'username': req.bodu.username,
+                            'email': req.body.email,
+                            'lastname': req.body.lastname,
+                            'firstname': req.body.firstname,
+                            'address': {
+                                'street': req.body.address.street,
+                                'number': req.body.address.number,
+                                'town': req.body.address.town,
+                                'postalCode': req.body.address.postalCode,
+                                'country': req.body.address.country
+                            },
+                            'sex': req.body.sex,
+                            'phone': req.body.phone,
+                        }
                     }, (err, user) => {
                         if (err) {
                             res.status(500)
@@ -185,32 +308,9 @@ module.exports.updateUser = (req, res) => {
                 }
             })
         } else {
-            User.findOne({
-                'email': req.body.email
-            }, (err, user) => {
-                if (user) {
-                    return res.json({
-                        error: "Email already use."
-                    })
-                } else {
-                    User.update({
-                        '_id': req.params.id
-                    }, {
-                        $set: req.body
-                    }, (err, user) => {
-                        if (err) {
-                            res.status(500)
-                            return res.json({
-                                error: 'Could not update this user'
-                            })
-                        }
-                        res.status(200)
-                        return res.json({
-                            message: "User updated with success",
-                            user
-                        })
-                    })
-                }
+            res.status(500)
+            return res.json({
+                error: 'Could not update this user'
             })
         }
     })

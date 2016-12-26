@@ -18,6 +18,10 @@ export {RECEIVE_PRODUCTS,
 		fetchProductsByCat,
 		deleteProduct} from './apiActions'
 
+export {SEARCH_PRODUCTS_SUCCESS,
+	SEARCH_PRODUCTS_FAILURE,
+	searchProduct} from './searchActions'
+
 export {LOGIN_SUCCESS,
 		LOGIN_FAILURE,
 		fetchToken,

@@ -4,4 +4,5 @@ node_modules/
 *.log
 api/config/dev.json
 api/config/prod.json
+api/config/auth.json
 .idea/

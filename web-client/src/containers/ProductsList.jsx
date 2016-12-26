@@ -1,14 +1,17 @@
 import { connect } from 'react-redux'
 
-import { fetchAll, fetchProductsByCat } from '../actions'
+import { fetchAll, fetchProductsByCat, deleteProduct } from '../actions'
 import { addToCart } from '../actions'
 
 import {_productsList} from '../components'
 
 const mapStateToProps = (state) => {
-	let { products } = state.api
+	const {products} = state.api
+	const {user, token} = state.auth
 	return {
-		products
+		products,
+		user,
+		token
 	}
 }
 
@@ -22,6 +25,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		addToCart: (product) => {
 			dispatch(addToCart(product))
+		},
+		delete: (id, token) => {
+			dispatch(deleteProduct(id, token))
 		}
 	}
 }

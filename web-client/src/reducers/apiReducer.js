@@ -7,7 +7,7 @@ const initialState = stub
 function apiReducer(state = initialState, action){
 	switch(action.type){
 		case RECEIVE_PRODUCTS: { 
-			let { products } = action
+			const products = action.products || []
 			let newState = Object.assign({}, state, {
 				products
 			})

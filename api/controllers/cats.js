@@ -60,7 +60,8 @@ module.exports.getByCat = (req, res) => {
 		if (products.length === 0) {
 			res.status(404)
 			return res.json({
-				err: "No products found in this category :("
+				err: "No products found in this category :(",
+				products: []
 			})
 		}
 

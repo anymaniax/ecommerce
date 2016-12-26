@@ -15,7 +15,8 @@ export {RECEIVE_PRODUCTS,
 		fetchAll,
 		fetchById,
 		fetchCats,
-		fetchProductsByCat} from './apiActions'
+		fetchProductsByCat,
+		deleteProduct} from './apiActions'
 
 export {LOGIN_SUCCESS,
 		LOGIN_FAILURE,

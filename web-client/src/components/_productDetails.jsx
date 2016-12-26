@@ -15,10 +15,10 @@ class _ProductDetails extends React.Component  {
 			<div>
 				{details ? 
 					<div>
-						<h2>{details.nom}</h2>
-						<img role="presentation" src={details.thumbnail} width="200px" />
-						<p>{`Prix: ${details.price.value} ${details.price.currency}`}</p>
-						<p>{details.desc}</p>
+						<h2>{details.nom || ''}</h2>
+						<img role="presentation" src={details.thumbnail || ''} width="200px" />
+						<p>{`Prix: ${details.price.value || ''} ${details.price.currency || ''}`}</p>
+						<p>{details.desc || ''}</p>
 					</div>
 					:
 					<span>Loading...</span>

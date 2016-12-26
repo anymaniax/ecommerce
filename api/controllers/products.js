@@ -77,11 +77,15 @@ module.exports.delProduct = (req, res) => {
 	}, (err, product) => {
 		if (err) {
 			res.status(500)
-			return res.json('Could not remove this product :(')
+			return res.json({
+				error: 'Could not remove this product :('
+            })
 		}
 
 		res.status(204)
-		res.end()
+		res.json({
+			message: 'Product deleted with success'
+		})
 	})
 }
 

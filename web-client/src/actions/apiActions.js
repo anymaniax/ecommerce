@@ -4,9 +4,16 @@ import conf from '../config/conf.json'
 
 export const RECEIVE_PRODUCTS = 'receive products'
 function receiveProducts(products){
-	return {
-		type: RECEIVE_PRODUCTS,
-		products
+	if(products.err){
+		return {
+			type: RECEIVE_PRODUCTS,
+			products: []
+		}
+	} else {
+        return {
+            type: RECEIVE_PRODUCTS,
+            products
+        }
 	}
 }
 
@@ -40,6 +47,23 @@ export function fetchById(id){
 			.then(response => response.json())
 			.then(details => dispatch(receiveDetails(details)))
 	}
+}
+
+
+export function deleteProduct(id, token, cat = 'all'){
+    return function(dispatch){
+        return fetch(`${conf.url}products/${id}?token=${token}`, {
+        	method: 'DELETE'
+		}).then(response => {
+			if(response.status === 204){
+				if(cat === 'all'){
+					dispatch(fetchAll())
+				} else {
+					dispatch(fetchProductsByCat(cat))
+				}
+			}
+		})
+    }
 }
 
 export function fetchCats(){

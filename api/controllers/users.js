@@ -142,14 +142,7 @@ module.exports.updateUser = (req, res) => {
     User.findOne({
         '_id': req.params.id
     }, (err, user) => {
-        if (user.username == req.body.username && user.email == req.body.email && user.firstname == req.body.firstname && user.lastname == req.body.lastname &&
-        user.sex == req.body.sex && user.phone == req.body.phone && user.address.street == req.body.address.street && user.address.number == req.body.address.number
-        && user.address.town == req.body.address.town && user.address.postalCode == req.body.address.postalCode && user.address.country == req.body.address.country) {
-            res.status(500)
-            return res.json({
-                error: 'Nothing have change'
-            })
-        } else if (user.username == req.body.username && user.email == req.body.email) {
+        if (user.username == req.body.username && user.email == req.body.email) {
             User.update({
                 '_id': req.params.id
             }, {

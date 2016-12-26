@@ -60,7 +60,8 @@ module.exports.getById = (req, res) => {
                         number: user.address.number,
                         town: user.address.town,
                         postalCode: user.address.postalCode,
-                        country: user.address.country }
+                        country: user.address.country },
+                role: user.role
             }
             console.log(ByUser);
             return res.json(ByUser)

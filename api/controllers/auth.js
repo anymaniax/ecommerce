@@ -37,7 +37,8 @@ module.exports.auth = (req, res) => {
                             town: user.address.town,
                             postalCode: user.address.postalCode,
                             country: user.address.country
-                        }
+                        },
+                        role: user.role
                     }
                     let token = jwt.sign(ByUser, SuperSecret, {
                         expiresIn: "24h"

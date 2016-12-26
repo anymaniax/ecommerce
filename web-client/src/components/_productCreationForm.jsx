@@ -81,7 +81,17 @@ class _productCreationForm extends Component {
 	}
 
 	render(){
-		console.log(this.props)
+		let errorMarkup
+		if(this.props.error){
+			switch(this.props.error){
+				case 'Product already use.': {
+                    errorMarkup = <p>Un produit porte déjà ce nom</p>
+					break
+				}
+				default:
+					errorMarkup = <p>Une erreur s'est produite</p>
+			}
+		}
 		let linkMarkup
 		if(this.props.id){
 			linkMarkup = <Link to={'/products/' + this.props.id}>{'http://localhost:3000/products/' + this.props.id}</Link>
@@ -98,6 +108,7 @@ class _productCreationForm extends Component {
 						<div className="col-md-6">
 							<form onSubmit={this.handleSubmit}>
 								<h2>Création d'un produit</h2>
+								{errorMarkup}
 								<div className="form-group">
 									<label htmlFor="productName">Nom</label>
 									<input 

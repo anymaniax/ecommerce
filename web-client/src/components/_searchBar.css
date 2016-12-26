@@ -1,6 +1,7 @@
 .search-form .form-group {
   float: left !important;
-  transition: all 0.35s, border-radius 0s;
+  transition: all 2s, border-radius 0s;
+  transition-delay: 2s;
   width: 32px;
   height: 32px;
   background-color: #fff;
@@ -34,6 +35,7 @@
 .search-form .form-group:hover,
 .search-form .form-group.hover {
   width: 50%;
+  transition: all 0.35s, border-radius 0s
 }
 .search-form .form-group span.form-control-feedback {
   position: absolute;

@@ -63,6 +63,7 @@ export function fetchToken(username, password){
 			})
 		}).then(response => response.json())
 		.then(json => {
+			console.log(json)
 			if(!json.success){
 				dispatch(loginFailure(json.message))
 				return dispatch(finishLoading())

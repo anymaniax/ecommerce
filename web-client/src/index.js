@@ -30,9 +30,14 @@ const store = createStore(
 )
 
 store.subscribe(() => {
+	const {cart, auth} = store.getState()
 	saveState({
-		cart: store.getState().cart,
-		auth: store.getState().auth
+		cart,
+		auth: {
+			token: auth.token,
+			authenticated: auth.authenticated,
+			user: auth.user
+		}
 	})
 })
 
@@ -56,4 +61,4 @@ ReactDOM.render(
 		</Router>
 	</Provider>,
 	document.getElementById('root')
-);
+)

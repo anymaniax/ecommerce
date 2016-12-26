@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
+import {browserHistory} from 'react-router'
 
-import Loader from './_loader'
+import {Loader} from './_loader'
 
 class _register extends Component {
 
@@ -20,7 +21,7 @@ class _register extends Component {
 				postalCode: 7000,
 				country: 'Belgium'
 			},
-			errorMessage: '',
+			errorMessage: [],
 			sex: 'M',
 			phone: 'Test phone number',
 			role: 'user'
@@ -71,39 +72,126 @@ class _register extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault()
-		let err = ''
-		if(this.state.password !== this.state.passwordCheck){
-			err += 'Les passwords ne correspondent pas'
+		let err = []
+		if(this.state.password !== this.state.passwordCheck || (this.state.password === '' && this.state.passwordCheck === '')){
+			err.push('Les passwords ne correspondent pas')
 		}
 
-		if(!err){
-			return this.props.register(this.state)
+		if(this.state.username === ''){
+			err.push('Username ne peut pas être vide')
+		}
+
+		if(this.state.email === ''){
+			err.push('Le mail ne peut pas être vide')
+		}
+
+		if(err.length === 0){
+			this.props.register(this.state)
 		}
 		this.setState({
 			errorMessage: err
 		})
 	}
 
+	handleInputs = (e, TAG) => {
+		e.preventDefault()
+		const value = e.target.value
+		switch(TAG){
+			case 'street': {
+                const address = Object.assign({}, this.state.address, {
+                    street: value
+                })
+                this.setState({
+                    address
+                })
+                break;
+            }
+
+			case 'street number': {
+                const address = Object.assign({}, this.state.address, {
+                    number: value
+                })
+                this.setState({
+                    address
+                })
+                break;
+            }
+
+			case 'town': {
+                const address = Object.assign({}, this.state.address, {
+                    town: value
+                })
+                this.setState({
+                    address
+                })
+                break;
+            }
+
+			case 'postal code': {
+                const address = Object.assign({}, this.state.address, {
+                    postalCode: value
+                })
+                this.setState({
+                    address
+                })
+                break;
+            }
+
+			case 'country': {
+                const address = Object.assign({}, this.state.address, {
+                    country: value
+                })
+                this.setState({
+                    address
+                })
+                break;
+            }
+
+			default:
+				console.log('Tag inconnu')
+				break;
+		}
+	}
+
+    componentWillReceiveProps(nextProps){
+		const {auth} = nextProps
+		if(auth.link && auth.link != ''){
+			browserHistory.push('/login')
+		}
+
+		if(auth.errorMessage && auth.errorMessage != ''){
+			let errors = [...this.state.errorMessage]
+			errors.push(auth.errorMessage)
+			this.setState({
+				errorMessage: errors
+			})
+		}
+	}
+
 	render(){
 		return (
+			this.props.auth.loading?
+				<Loader />
+					:
 				<form>
 					<h2>Parlez nous un peu de vous</h2>
+                    {this.state.errorMessage.map((e, i) => <p key={i}>{e}</p>)}
 					<div className="form-group">
 						<label>
 							Username
 						</label>
-						<input 
+						<input
 							className="form-control"
-							type="text" 
+							type="text"
 							placeholder="Username..."
 							value={this.state.username}
 							onChange={this.handleUsername} />
 						<label>
 							Mail
 						</label>
-						<input 
+						<input
 							className="form-control"
-							type="text" 
+							type="text"
 							placeholder="Email..."
 							value={this.state.email}
 							onChange={this.handleEmail} />
@@ -112,34 +200,79 @@ class _register extends Component {
 						</label>
 						<input
 							className="form-control"
-							type="text" 
+							type="text"
 							placeholder="Prénom..."
 							value={this.state.firstname}
 							onChange={this.handleFirstName} />
 						<label>
 							Nom de famille
 						</label>
-						<input 
+						<input
 							className="form-control"
-							type="text" 
+							type="text"
 							placeholder="Nom..."
 							value={this.state.lastname}
 							onChange={this.handleLastName} />
 						<label>
+							Rue
+						</label>
+						<input
+							className="form-control"
+							type="text"
+							placeholder="Rue..."
+							value={this.state.address.street}
+							onChange={(e) => this.handleInputs(e, "street")} />
+						<label>
+							Numéro de maison
+						</label>
+						<input
+							className="form-control"
+							type="text"
+							placeholder="Numéro de maison..."
+							value={this.state.address.number}
+							onChange={(e) => this.handleInputs(e, "street number")} />
+						<label>
+							Localité
+						</label>
+						<input
+							className="form-control"
+							type="text"
+							placeholder="Localité..."
+							value={this.state.address.town}
+							onChange={(e) => this.handleInputs(e, "town")} />
+						<label>
+							Code postal
+						</label>
+						<input
+							className="form-control"
+							type="text"
+							placeholder="Code postal..."
+							value={this.state.address.postalCode}
+							onChange={(e) => this.handleInputs(e, "postal code")} />
+						<label>
+							Pays
+						</label>
+						<input
+							className="form-control"
+							type="text"
+							placeholder="Pays..."
+							value={this.state.address.town}
+							onChange={(e) => this.handleInputs(e, "country")} />
+						<label>
 							Password
 						</label>
-						<input 
+						<input
 							className="form-control"
-							type="password" 
+							type="password"
 							placeholder="Password..."
 							value={this.state.password}
 							onChange={this.handlePassword} />
 						<label>
 							Vérification du password
 						</label>
-						<input 
+						<input
 							className="form-control"
-							type="Password" 
+							type="Password"
 							placeholder="Vérification du password..."
 							value={this.state.passwordCheck}
 							onChange={this.handlePasswordCheck} />
@@ -151,7 +284,6 @@ class _register extends Component {
 							S'inscrire
 						</button>
 					</div>
-					{this.state.errorMessage}
 				</form>
 		)
 	}

@@ -32,12 +32,13 @@ function auth(state = initialState, action){
 				link: action.link
 			})
 
-		case LOGOUT:
+		case REGISTER_FAILURE:
 			return Object.assign({}, state, {
-				authenticated: false,
-				token: '',
-				user: {}
+				errorMessage: action.error
 			})
+
+		case LOGOUT:
+			return initialState
 
 		case START_LOADING:
 			return Object.assign({}, state, {

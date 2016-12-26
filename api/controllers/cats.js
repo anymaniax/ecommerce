@@ -32,6 +32,12 @@ module.exports.getAll = (req, res) => {
 module.exports.addCat = (req, res) => {
 	let cat = Cat(req.body)
 	cat.save((err, cat) => {
+		if(err){
+			res.status(406)
+			return res.json({
+				err: "Could not create this category"
+			})
+		}
 		res.status(201)
 		res.send({
 			link: `http://localhost:${PORT}/api/v1/cats/${cat.nom}`

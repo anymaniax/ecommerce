@@ -17,20 +17,12 @@ export {RECEIVE_PRODUCTS,
 		fetchCats,
 		fetchProductsByCat} from './apiActions'
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 export {SEARCH_PRODUCTS_SUCCESS,
 	SEARCH_PRODUCTS_FAILURE,
 	searchProduct} from './searchActions'
-=======
->>>>>>> Stashed changes
+
 export {LOGIN_SUCCESS,
 		LOGIN_FAILURE,
 		fetchToken,
 		logout,
 		LOGOUT} from './authActions'
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes

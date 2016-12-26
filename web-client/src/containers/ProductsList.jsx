@@ -6,9 +6,9 @@ import {_productsList} from '../components'
 
 const mapStateToProps = (state) => {
 	let products
-	if(state.searchReducer.products){
-		products = state.searchReducer.products
-		state.searchReducer.products = ""
+	if(state.search.products){
+		products = state.search.products
+		state.search.products = ""
 	} else {
 		products = state.api.products
 	}

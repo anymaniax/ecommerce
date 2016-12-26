@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
 
+import './_searchBar.css'
+
 class _searchBar extends React.Component {
     handleSubmit = (e) => {
             e.preventDefault()

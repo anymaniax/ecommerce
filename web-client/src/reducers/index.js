@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux'
 
-import cartReducer from './cartReducer'
-import apiReducer from './apiReducer'
-import productCreationReducer from './productCreationReducer'
+import cart from './cartReducer'
+import api from './apiReducer'
+import productCreation from './productCreationReducer'
+import auth from './authReducer'
 
 const reducers = combineReducers({
-	cart: cartReducer,
-	api: apiReducer,
-	productCreation: productCreationReducer
+	cart,
+	api,
+	productCreation,
+	auth
 })
 
 export default reducers

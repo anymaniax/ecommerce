@@ -4,21 +4,25 @@ import {_productCreationForm} from '../components'
 
 import {createProduct} from '../actions'
 
-const mapStateToProps = ({api, productCreation}) => {
+const mapStateToProps = ({api, productCreation, auth}) => {
 	const {cats} = api
 	const {error, link, id} = productCreation
+	const {authenticated, user, token} = auth
 	return {
 		cats,
 		error,
 		link,
-		id
+		id,
+		authenticated,
+		user,
+        token
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		create: (product) => {
-			dispatch(createProduct(product))
+		create: (product, token) => {
+			dispatch(createProduct(product, token))
 		}
 	}
 }

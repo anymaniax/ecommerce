@@ -105,11 +105,8 @@ module.exports.updateProduct = (req, res) => {
 }
 
 module.exports.search = (req, res) => {
-	let {
-		query
-	} = req.params
+	let {query} = req.params
 	Product.search({
-		//`${query}~2`
 		"query": {
 			"multi_match": {
 				"query": query,

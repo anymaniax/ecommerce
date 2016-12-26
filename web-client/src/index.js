@@ -6,12 +6,15 @@ import thunkMiddleware from 'redux-thunk'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import App from './App';
-import {ProductsList, ProductDetails, ProductCreationForm, Cart} from './containers'
+import {ProductsList, ProductDetails, ProductCreationForm, Cart, LoginPage} from './containers'
 import reducers from './reducers'
 import {fetchCats} from './actions'
 import {loadState, saveState} from './models/localStorage'
 
 import '../assets/bootstrap-4/css/bootstrap.css'
+
+import _register from './components/_register.jsx'
+import Register from './containers/Register'
 
 const persistedstate = loadState()
 
@@ -27,8 +30,14 @@ const store = createStore(
 )
 
 store.subscribe(() => {
+	const {cart, auth} = store.getState()
 	saveState({
-		cart: store.getState().cart
+		cart,
+		auth: {
+			token: auth.token,
+			authenticated: auth.authenticated,
+			user: auth.user
+		}
 	})
 })
 
@@ -43,6 +52,8 @@ ReactDOM.render(
 				<Route path="products/:id" component={ProductDetails} />
 				<Route path="cats/:catName" component={ProductsList} />
 				<Route path="cart" component={Cart} />
+				<Route path="login" component={LoginPage} />
+				<Route path="register" component={Register} />
 			</Route>
 			<Route path="/productCreation">
 				<IndexRoute component={ProductCreationForm} />
@@ -50,4 +61,4 @@ ReactDOM.render(
 		</Router>
 	</Provider>,
 	document.getElementById('root')
-);
+)

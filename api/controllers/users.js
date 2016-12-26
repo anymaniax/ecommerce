@@ -60,7 +60,8 @@ module.exports.getById = (req, res) => {
                         number: user.address.number,
                         town: user.address.town,
                         postalCode: user.address.postalCode,
-                        country: user.address.country }
+                        country: user.address.country },
+                role: user.role
             }
             console.log(ByUser);
             return res.json(ByUser)
@@ -102,6 +103,7 @@ module.exports.addUser = (req, res) => {
                     user.save((err, user) => {
                         if (err) {
                             res.status(406)
+                            console.log(err)
                             return res.json({
                                 error: "Could not create this user"
                             })

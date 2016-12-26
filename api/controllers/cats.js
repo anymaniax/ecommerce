@@ -30,7 +30,6 @@ module.exports.getAll = (req, res) => {
 }
 
 module.exports.addCat = (req, res) => {
-	console.log(req.body.nom);
 	Cat.findOne({'nom':req.body.nom},(err,cats) =>{
 		if (err) {
 			res.status(500)

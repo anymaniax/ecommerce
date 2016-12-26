@@ -20,7 +20,9 @@ Custom solution to catch malformed JSON error
 **/
 app.use((err, req, res, next) => {
 	console.log(err.stack)
-	res.status(500).send('Something broke')
+	res.status(500).json({
+		error: 'Something broke'
+	})
 })
 
 app.disable('x-powered-by')

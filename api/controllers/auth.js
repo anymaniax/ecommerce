@@ -37,27 +37,29 @@ module.exports.auth = (req, res) => {
                             town: user.address.town,
                             postalCode: user.address.postalCode,
                             country: user.address.country
-                        }
+                        },
+                        role: user.role
                     }
                     let token = jwt.sign(ByUser, SuperSecret, {
                         expiresIn: "24h"
                     });
 
                     res.json({
-                        sucess: true,
+                        success: true,
                         message: 'Enjoy your token!',
                         token: token
                     });
                 } else {
                     res.json({
-                        sucess: false,
+                        success: false,
                         message: 'Authentication failed.'
-                    })
+                    });
                 }
             });
         }
     });
 }
+
 
 module.exports.checkToken = (req, res, next) => {
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -65,7 +67,7 @@ module.exports.checkToken = (req, res, next) => {
         jwt.verify(token, SuperSecret, (err, decoded) => {
             if (err) {
                 return res.json({
-                    sucess: false,
+                    success: false,
                     message: 'Failed to Authentication token.'
                 });
 
@@ -78,6 +80,16 @@ module.exports.checkToken = (req, res, next) => {
         return res.status(403).send({
             success: false,
             message: 'No token provided.'
-        })
+        });
     }
+}
+
+module.exports.requireAdmin = (req, res, next) => {
+    if(!req.decode || req.decode.role !== 'admin'){
+        return res.json({
+            success: false,
+            message: 'This route can only be accessed by an administrator'
+        });
+    }
+    next();
 }

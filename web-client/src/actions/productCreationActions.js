@@ -18,9 +18,9 @@ function productCreationFailure(error){
 	}
 }
 
-export function createProduct(params){
+export function createProduct(params, token){
 	return function(dispatch){
-		return fetch(`${conf.url}products`, {
+		return fetch(`${conf.url}products?token=${token}`, {
 			method: 'POST',
 			headers: new Headers({
 				'Content-Type': 'application/json'
@@ -29,6 +29,7 @@ export function createProduct(params){
 		})
 		.then(response => response.json())
 		.then(message => {
+			console.log(message)
 			if(message.error){
 				return dispatch(productCreationFailure(message.error))
 			}

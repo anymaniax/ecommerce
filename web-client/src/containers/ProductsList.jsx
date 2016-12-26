@@ -1,12 +1,17 @@
 import { connect } from 'react-redux'
 
-import { fetchAll, fetchProductsByCat } from '../actions'
-import { addToCart } from '../actions'
+import { fetchAll, fetchProductsByCat, addToCart, searchProduct } from '../actions'
 
 import {_productsList} from '../components'
 
 const mapStateToProps = (state) => {
-	let { products } = state.api
+	let products
+	if(state.searchReducer.products){
+		products = state.searchReducer.products
+		state.searchReducer.products = ""
+	} else {
+		products = state.api.products
+	}
 	return {
 		products
 	}

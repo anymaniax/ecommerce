@@ -1,12 +1,15 @@
 import React from 'react'
-import {Link, browserHistory} from 'react-router'
+import { Link, browserHistory } from 'react-router'
 
 import CartViewer from '../containers/CartViewer'
+import SearchBar from '../containers/SearchBar'
+
+import './_navbar.css'
 
 import './_navbar.css'
 
 const _navBar = (props) => {
-	function landing(e){
+	function landing(e) {
 		e.preventDefault()
 		props.fetchAll()
 		browserHistory.push('/')
@@ -17,13 +20,22 @@ const _navBar = (props) => {
 				<a href="/" className="navbar-brand" onClick={landing}>Ecomm</a>
 				<ul className="nav navbar-nav">
 					{props.hideDefault ||
-					<li className="nav-item">
-						<CartViewer className="nav-link"/>
-					</li>}
+						<li className="nav-item">
+							<CartViewer className="nav-link" />
+						</li>}
 
 					{props.hideDefault || <li className="nav-item">
 						<Link to='/productCreation' className="nav-link">Ajouter un produit +</Link>
 					</li>}
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+					{props.hideDefault ||<li>
+						<SearchBar/>
+					</li>}
+						{props.children}
+=======
+>>>>>>> Stashed changes
 					{!props.authenticated ? 
 						<li className="nav-item">
 							<Link to='/login' className="nav-link">Se connecter</Link> 
@@ -34,10 +46,11 @@ const _navBar = (props) => {
 						</li>
 					}
 					{props.children}
+>>>>>>> origin/master
 				</ul>
 			</div>
 		</nav>
-	)
+			)
 }
 
 export default _navBar

@@ -14,7 +14,11 @@ class _catViewer extends React.Component {
 		let catsMarkup = cats.map(e => <Link key={i++} to={`/cats/${e}`} className="btn btn-primary">{`${e}`}</Link>)
 		return (
 			<div>
-			{catsMarkup}
+			{cats.length === 0 ?
+				<span>Aucune catégorie pour le moment</span>
+				:
+				catsMarkup
+			}
 			</div>
 		)	
 	}

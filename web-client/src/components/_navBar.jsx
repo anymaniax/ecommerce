@@ -25,10 +25,10 @@ const _navBar = (props) => {
 					{props.user.role === 'admin' && (
 						<span>
 							<li className="nav-item">
-								<Link to='/productCreation' className="nav-link">Ajouter un produit +</Link>
+								<Link to='/productCreation' className="nav-link">| Ajouter un produit +</Link>
 							</li>
 							<li className="nav-item">
-								<Link to='/cats' className="nav-link">Catégories + </Link>
+								<Link to='/cats' className="nav-link"> | Catégories +  |  </Link>
 							</li>
 						</span>
 					)}

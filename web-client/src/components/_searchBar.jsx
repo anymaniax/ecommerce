@@ -9,7 +9,8 @@ class _searchBar extends React.Component {
             e.preventDefault()
             this.props.searchProduct(this.refs.search.value)
             browserHistory.push('/')
-        }
+    }
+
     handleClick = (e) => {
         ReactDOM.findDOMNode(this.refs.search).focus(); 
     }

@@ -60,7 +60,6 @@ module.exports.auth = (req, res) => {
     });
 }
 
-
 module.exports.checkToken = (req, res, next) => {
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (token) {

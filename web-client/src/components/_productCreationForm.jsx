@@ -23,13 +23,6 @@ class _productCreationForm extends Component {
 		}
 	}
 
-	componentWillMount(){
-		if(!this.props.authenticated || this.props.user.role !== 'admin'){
-			alert('Seul les admins peuvent créer de nouveaux produits')
-            browserHistory.push('/login')
-		}
-	}
-
 	handleName = (e) => {
 		this.setState({
 			nom: e.target.value

@@ -1,11 +1,15 @@
 let router = require('express').Router()
 let ctrl = require('../controllers/users')
+let auth = require('../controllers/auth')
 
-router.get('/', ctrl.getAll)
-router.get('/:id', ctrl.getById)
+const authMixin = [auth.checkToken, auth.requireAdmin]
+const authId = [auth.checkToken, auth.requireId]
+
+router.get('/', authMixin, ctrl.getAll)
+router.get('/:id', auth.requireId, ctrl.getById)
 router.post('/', ctrl.addUser)
-router.delete('/:id', ctrl.delUser)
-router.put('/:id', ctrl.updateUser)
-router.post('/pass/:id', ctrl.updatePass)
+router.delete('/:id', auth.requireId, ctrl.delUser)
+router.put('/:id', auth.requireId, ctrl.updateUser)
+router.post('/pass/:id', auth.requireId, ctrl.updatePass)
 
 module.exports = router

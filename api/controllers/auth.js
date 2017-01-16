@@ -93,3 +93,13 @@ module.exports.requireAdmin = (req, res, next) => {
     }
     next();
 }
+
+module.exports.requireId = (req, res, next) => {
+    if(req.decode && req.decode._id === req.params.id || req.decode.role === 'admin') {
+        return next();
+    }
+    return res.json({
+        success: false,
+        message: 'Failed to Authentication'
+    })
+}

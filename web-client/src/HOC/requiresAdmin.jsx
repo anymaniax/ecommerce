@@ -6,7 +6,7 @@ import {browserHistory} from 'react-router'
 const adminHOC = (WrappedComponent, state) => {
     console.log(state.auth.user)
     if(state.auth.authenticated && state.auth.user.role === "admin"){
-        return class adminHOC extends WrappedComponent {
+        return class requiresAdmin extends WrappedComponent {
             render(){
                 return <WrappedComponent {...this.props}/>
             }

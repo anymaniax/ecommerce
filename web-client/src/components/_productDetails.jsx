@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import {formater} from '../models/priceFormater'
 
 class _ProductDetails extends React.Component  {
 
@@ -17,7 +18,7 @@ class _ProductDetails extends React.Component  {
 					<div>
 						<h2>{details.nom || ''}</h2>
 						<img role="presentation" src={details.thumbnail || ''} width="200px" />
-						<p>{`Prix: ${details.price.value || ''} ${details.price.currency || ''}`}</p>
+						<p>{`Prix: ${formater(details.price.value) || ''} ${details.price.currency || ''}`}</p>
 						<p>{details.desc || ''}</p>
 					</div>
 					:

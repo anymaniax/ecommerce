@@ -84,6 +84,7 @@ module.exports.checkToken = (req, res, next) => {
 }
 
 module.exports.requireAdmin = (req, res, next) => {
+    console.log(req.decode);
     if(!req.decode || req.decode.role !== 'admin'){
         return res.json({
             success: false,

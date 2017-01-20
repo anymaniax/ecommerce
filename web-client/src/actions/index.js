@@ -29,4 +29,8 @@ export {LOGIN_SUCCESS,
 		LOGOUT} from './authActions'
 
 export {fetchUserList,
-    	USER_LIST_SUCCESS} from './adminUsersActions'
+    	USER_LIST_SUCCESS,
+		fetchCategories,
+		FETCH_CAT_SUCCESS,
+    	deleteCategory,
+    	addCategory} from './adminUsersActions'

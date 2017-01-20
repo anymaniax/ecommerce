@@ -6,7 +6,7 @@ import thunkMiddleware from 'redux-thunk'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import App from './App';
-import {ProductsList, ProductDetails, ProductCreationForm, Cart, LoginPage, AdminPanel, UsersHandler} from './containers'
+import {ProductsList, ProductDetails, ProductCreationForm, Cart, LoginPage, AdminPanel, UsersHandler, CatsHandler} from './containers'
 import reducers from './reducers'
 import {fetchCats} from './actions'
 import {loadState, saveState} from './models/localStorage'
@@ -15,10 +15,9 @@ import '../assets/bootstrap-4/css/bootstrap.css'
 
 import _register from './components/_register.jsx'
 import {_adminPanel} from './components'
-import requiresAdmin from './containers/adminPanel/requiresAdmin'
+import requiresAdmin from './HOC/requiresAdmin'
 import Register from './containers/Register'
-
-console.log(requiresAdmin);
+import User from './containers/adminPanel/User'
 
 const persistedstate = loadState()
 
@@ -48,8 +47,6 @@ store.subscribe(() => {
 store.dispatch(fetchCats())
 
 
-console.log('User Handler', UsersHandler)
-
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={browserHistory}>
@@ -61,7 +58,11 @@ ReactDOM.render(
 				<Route path="login" component={LoginPage} />
 				<Route path="register" component={Register} />
 				<Route path="admin" component={requiresAdmin(AdminPanel, store.getState())}>
-					<Route path="users" component={UsersHandler} />
+					<Route path="users" component={UsersHandler}>
+						<Route path=":id" component={User} />
+					</Route>
+					<Route path="categories" component={CatsHandler}>
+					</Route>
 				</Route>
 			</Route>
 			<Route path="/productCreation">

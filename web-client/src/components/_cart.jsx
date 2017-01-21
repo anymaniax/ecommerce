@@ -1,19 +1,61 @@
 import React from 'react'
 
+import {formater} from '../models/priceFormater'
+
 const Item = (props) => {
 	return (
-		<p>{props.nom} - {props.quantity} - <button onClick={() => props.delete(props.cartId)}className="btn btn-danger"><i className="fa fa-trash-o" aria-hidden="true"></i></button></p>
+		<div className="card row">
+			<div className="col-md-2">
+				<p>
+					<img width="150px" src={props.picture} className="img-thumbnail" />
+				</p>
+			</div>
+			<div className="col-md-10">
+				<p>
+					{props.nom}
+				</p>
+				<p>
+					<small className="text-muted">Prix unitaire: {formater(props.price)}</small>
+				</p>
+				<p>
+					<small className="text-muted">Quantité: {props.quantity}</small>
+				</p>
+				<div>
+					<div className="btn-group" role="group" aria-label="Basic example">
+						<button onClick={() => props.remove(props.cartId)} type="button" className="btn btn-secondary">
+							<i className="fa fa-minus"></i>
+						</button>
+						<button onClick={() => props.add(props.product)} type="button" className="btn btn-secondary">
+							<i className="fa fa-plus"></i>
+						</button>
+						<button onClick={() => props.remove(props.cartId, props.quantity)} type="button" className="btn btn-secondary">
+							<i className="fa fa-trash"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	)
 }
 
 const _cart = (props) => {
-	let price = props.price
-	let productsMarkup = props.items.map(e => <Item quantity={e.quantity} cartId={e.cartId} nom={e.product.nom} delete={props.remove} />)
+	let price = formater(props.price)
+	let productsMarkup = props.items.map(e =>
+		<Item
+			product={e.product}
+			price={e.product.price.value}
+			picture={e.product.thumbnail}
+			quantity={e.quantity}
+			cartId={e.cartId}
+			nom={e.product.nom}
+			remove={props.remove}
+			add={props.add}
+			trash={props.trash}/>)
 	return (
 		<div>
-			<p>Prix total: {price + ' eur'}</p>
+			<h2 className="text-xs-right display-4">Total: {price}€</h2>
 			{productsMarkup}
-			<button onClick={() => props.reset()} className="btn btn-primary"><i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{' '}Remise à 0 du Cart</button>
+			<button onClick={() => props.reset()} className="btn btn-primary btn-lg btn-block">Vider le Panier{' '}<i className="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
 		</div>
 	)
 }

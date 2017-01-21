@@ -19,7 +19,7 @@ class _productCreationForm extends Component {
 			cat: [],
 			tags: [],
 			stock: 42,
-			thumbnail: 'http://placehold.it/200x200'
+			thumbnail: 'http://lorempixel.com/g/200/200/'
 		}
 	}
 

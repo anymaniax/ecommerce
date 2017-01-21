@@ -31,7 +31,7 @@ export function cartReducer(state = initialState, action){
 		case REMOVE_FROM_CART: {
 			let newState = [...state.items]
 			const productPos = newState.map(e => e.cartId).indexOf(action.cartId)
-			let price = state.price - newState[productPos].product.price.value
+            let price = state.price - newState[productPos].product.price.value * action.quantity
 			if(newState[productPos].quantity - action.quantity > 0){
 				newState[productPos].quantity -= action.quantity
 			} else {

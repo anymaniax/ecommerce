@@ -1,14 +1,12 @@
 export const formater = (price) => {
-    /**let tempPrice = price.toString()
     let newPrice = []
-
-    for(let i = tempPrice.length, j = 1; i > -1; i--, j++){
-        newPrice.unshift(tempPrice.charAt(i))
-        console.log(j)
-        if(j % 3){
-            newPrice.unshift(' ')
+    const tempPrice = price.toString()
+    for(let i = tempPrice.length; i > -1; i--){
+        newPrice = [tempPrice[i], ...newPrice]
+        console.log(tempPrice.length - i + 1)
+        if((tempPrice.length - i) % 3 === 0){
+            newPrice = [" ", ...newPrice]
         }
     }
-    return newPrice.join().replace(new RegExp(',', 'g'), '')**/
-    return price
+    return newPrice.join().replace(new RegExp(',', 'g'), '')
 }

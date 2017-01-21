@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
 import {fetchUserList} from '../../actions'
-import _usersHandler from '../../components/adminPanel/_usersHandler'
+import {_usersHandler} from '../../components'
 
 const mapStateToProps = ({admin}) => {
     const {users} = admin

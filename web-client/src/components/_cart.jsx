@@ -7,7 +7,7 @@ const Item = (props) => {
 		<div className="card row">
 			<div className="col-md-2">
 				<p>
-					<img width="150px" src={props.picture} className="img-thumbnail" />
+					<img role="presentation" width="150px" src={props.picture} className="img-thumbnail" />
 				</p>
 			</div>
 			<div className="col-md-10">

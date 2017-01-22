@@ -28,6 +28,7 @@ function apiReducer(state = initialState, action){
 				})
 				return newState
 			}
+			break;
 		}
 		default:
 			return state

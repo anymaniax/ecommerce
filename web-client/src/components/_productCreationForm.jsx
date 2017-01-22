@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, browserHistory} from 'react-router'
+import {Link} from 'react-router'
 
 import {NavBar} from '../containers'
 import {_productDetails as ProductDetails} from '../components'

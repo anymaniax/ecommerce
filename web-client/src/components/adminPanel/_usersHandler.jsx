@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 
-const _userItem = ({user}) =>
+const userItem = ({user}) =>
     <li key={user._id}>
         <Link to={`/admin/users/${user._id}`}>{user.username}</Link>
     </li>
@@ -12,7 +12,7 @@ class _usersHandler extends React.Component {
         this.props.fetchUsers()
     }
     render() {
-        const userList = this.props.users.map(e => <_userItem key={e._id} user={e}/>)
+        const userList = this.props.users.map(e => <userItem key={e._id} user={e}/>)
         return (
             <div>
                 <div className="row">

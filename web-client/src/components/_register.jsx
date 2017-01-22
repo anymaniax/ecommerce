@@ -155,11 +155,11 @@ class _register extends Component {
 
     componentWillReceiveProps(nextProps){
 		const {auth} = nextProps
-		if(auth.link && auth.link != ''){
+		if(auth.link && auth.link !== ''){
 			browserHistory.push('/login')
 		}
 
-		if(auth.errorMessage && auth.errorMessage != ''){
+		if(auth.errorMessage && auth.errorMessage !== ''){
 			let errors = [...this.state.errorMessage]
 			errors.push(auth.errorMessage)
 			this.setState({

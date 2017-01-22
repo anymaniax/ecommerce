@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 
-import {fetchCats} from '../actions'
+import {fetchCats, fetchAll} from '../actions'
 
 import {_catViewer} from '../components'
 
@@ -15,6 +15,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchCats: () => {
 			dispatch(fetchCats())
+		}, fetchAll: () => {
+			dispatch(fetchAll())
 		}
 	}
 }

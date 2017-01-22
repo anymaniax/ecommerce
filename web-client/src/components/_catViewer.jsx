@@ -11,13 +11,22 @@ class _catViewer extends React.Component {
 
 	render(){
 		let cats = this.props.cats || []
-		let catsMarkup = cats.map(e => <Link key={i++} to={`/cats/${e}`} className="btn btn-primary">{`${e}`}</Link>)
+		let catsMarkup = cats.map(e => <Link key={i++} to={`/cats/${e}`} className="dropdown-item">{`${e}`}</Link>)
 		return (
 			<div>
 			{cats.length === 0 ?
 				<span>Aucune catégorie pour le moment</span>
 				:
-				catsMarkup
+				<div className="dropdown show">
+					<a className="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Parcourir les catégories
+					</a>
+
+					<div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<Link to="/" className="dropdown-item">Toutes</Link>
+						{catsMarkup}
+					</div>
+				</div>
 			}
 			</div>
 		)	

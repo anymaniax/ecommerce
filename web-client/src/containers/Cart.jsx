@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 
 import {_cart} from '../components'
 
-import {resetCart,removeFromCart} from '../actions'
+import {resetCart,removeFromCart, addToCart} from '../actions'
 
 const mapStateToProps = ({cart}) => {
 	let {items,price} = cart
@@ -17,8 +17,11 @@ const mapDispatchToProps = (dispatch) => {
 		reset: () => {
 			dispatch(resetCart())
 		},
-		remove: (cartId) => {
-			dispatch(removeFromCart(cartId))
+		remove: (cartId, quantity = 1) => {
+			dispatch(removeFromCart(cartId, quantity))
+		},
+		add: (product) => {
+			dispatch(addToCart(product))
 		}
 	}
 }

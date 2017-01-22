@@ -5,14 +5,15 @@ import api from './apiReducer'
 import productCreation from './productCreationReducer'
 import auth from './authReducer'
 import search from './searchReducer'
+import admin from './adminReducer'
 
 const reducers = combineReducers({
 	cart,
 	api,
 	productCreation,
 	search,
-	auth
-
+	auth,
+	admin
 })
 
 export default reducers

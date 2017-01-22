@@ -29,6 +29,29 @@ module.exports.getAll = (req, res) => {
 	})
 }
 
+module.exports.getAllWithDetails = (req, res) => {
+	Cat.find((err, cats) => {
+		if(cats.length === 0){
+			res.status(404)
+			return res.json({
+				err: "No category was found",
+				cats: []
+			})
+		}
+
+		if(err){
+			res.status(500)
+			return res.json({
+				err: "An unexpected error happened"
+			})
+		}
+
+		res.json({
+			cats
+		})
+	})
+}
+
 module.exports.addCat = (req, res) => {
 	Cat.findOne({'nom':req.body.nom},(err,cats) =>{
 		if (err) {
@@ -44,6 +67,7 @@ module.exports.addCat = (req, res) => {
 		} else {
 			let cat = Cat(req.body)
 			cat.save((err,cat)=>{
+				console.log('TEST', err)
 				res.status(201)
 				res.send({
 					link: `http://localhost:${PORT}/api/v1/cats/${cat.nom}`
@@ -74,4 +98,16 @@ module.exports.getByCat = (req, res) => {
 
 		return res.json(products)
 	})
+}
+
+module.exports.deleteCatCascade = (req, res) => {
+	Cat.findOneAndRemove({
+		'_id': req.params.id
+	}, () => {
+        res.status(204)
+        res.json({
+            success: true,
+            message: 'category deleted with success'
+        })
+    })
 }

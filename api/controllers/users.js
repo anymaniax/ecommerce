@@ -31,6 +31,7 @@ module.exports.getAll = (req, res) => {
                 email: user.email,
                 sex: user.sex,
                 phone: user.phone,
+                role: user.role,
                 address: {
                     street: user.address.street,
                     number: user.address.number,

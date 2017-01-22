@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, browserHistory} from 'react-router'
+import {Link} from 'react-router'
 
 import {NavBar} from '../containers'
 import {_productDetails as ProductDetails} from '../components'
@@ -19,14 +19,7 @@ class _productCreationForm extends Component {
 			cat: [],
 			tags: [],
 			stock: 42,
-			thumbnail: 'http://placehold.it/200x200'
-		}
-	}
-
-	componentWillMount(){
-		if(!this.props.authenticated || this.props.user.role !== 'admin'){
-			alert('Seul les admins peuvent créer de nouveaux produits')
-            browserHistory.push('/login')
+			thumbnail: 'http://lorempixel.com/g/200/200/'
 		}
 	}
 

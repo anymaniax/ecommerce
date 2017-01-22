@@ -1,0 +1,8 @@
+.git
+.gitignore
+.editorconfig
+node_modules
+api/node_modules
+web-client/node_modules
+*.log
+*.md

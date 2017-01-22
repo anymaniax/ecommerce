@@ -1,7 +1,13 @@
-
 version: '2'
 
 services:
+  nginx:
+    image: api-nginx:latest
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - 5000:80
   api:
     image: api:latest
     build:
@@ -9,10 +15,32 @@ services:
       dockerfile: api/Dockerfile
     environment:
       NODE_ENV: production 
-    volumes: 
-      - ./api/:/usr/src/app
     ports:
-      - 5000:5000
+      - 8080:5000
+    links:
+      - db
+      - es
+  api3:
+    image: api:latest
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      NODE_ENV: production 
+    ports:
+      - 8081:5000
+    links:
+      - db
+      - es
+  api2:
+    image: api:latest
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      NODE_ENV: production 
+    ports:
+      - 8082:5000
     links:
       - db
       - es
@@ -25,3 +53,12 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+  web:
+    image: web-client:latest
+    build:
+      context: .
+      dockerfile: web-client/Dockerfile
+    environment:
+      NODE_ENV: production 
+    ports:
+      - 3000:3000

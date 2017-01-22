@@ -30,6 +30,9 @@ class _ProductList extends React.Component {
 	render() {
 		const admin = this.props.user.role === 'admin' ? true : false
 		let productMarkup = this.props.products.map((e) => {
+			if(e === null){
+				return
+			}
 			return (
 				<ProductListItem
 					admin={admin}

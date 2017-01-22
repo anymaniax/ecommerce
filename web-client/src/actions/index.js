@@ -19,8 +19,9 @@ export {RECEIVE_PRODUCTS,
 		deleteProduct} from './apiActions'
 
 export {SEARCH_PRODUCTS_SUCCESS,
-	SEARCH_PRODUCTS_FAILURE,
-	searchProduct} from './searchActions'
+		SEARCH_PRODUCTS_FAILURE,
+		searchProduct,
+		EMPTY_SEARCH} from './searchActions'
 
 export {LOGIN_SUCCESS,
 		LOGIN_FAILURE,

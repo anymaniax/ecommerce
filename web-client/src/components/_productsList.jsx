@@ -1,15 +1,17 @@
 import React from 'react'
 import FlipMove from 'react-flip-move'
+import {browserHistory} from 'react-router'
 
 import ProductListItem from './_productListItem'
 import { CatViewer } from '../containers'
+
+import {Empty} from '../components'
 
 class _ProductList extends React.Component {
 
 	componentWillMount() {
 		let {catName} = this.props.params
 		let {search} = this.props.params
-		console.log(this.props);
 		if (catName) {
 			this.props.fetchProductsFromCat(catName)
 		} else if (search) {
@@ -46,12 +48,20 @@ class _ProductList extends React.Component {
 		return (
 			<div>
 				<CatViewer />
-				<FlipMove
-					staggerDurationBy="30"
-					duration={250}
-					easing="linear">
-					{productMarkup}
-				</FlipMove>
+				{this.props.products.length !== 0 ?
+					<FlipMove
+						staggerDurationBy="30"
+						duration={250}
+						easing="linear">
+						{productMarkup}
+					</FlipMove>
+					:
+					<Empty action={() => {
+						this.props.fetchProducts()
+                        browserHistory.push('/')
+                    }} message="Aucun produit trouvé"/>
+				}
+
 			</div>
 		)
 	}

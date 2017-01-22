@@ -1,4 +1,4 @@
-import {SEARCH_PRODUCTS_SUCCESS, SEARCH_PRODUCTS_FAILURE} from '../actions'
+import {SEARCH_PRODUCTS_SUCCESS, SEARCH_PRODUCTS_FAILURE, EMPTY_SEARCH} from '../actions'
 
 const initialState = {}
 
@@ -10,7 +10,11 @@ function searchProducts(state = initialState, action){
 				products
 			})
 			return newState
-			
+
+		case EMPTY_SEARCH:
+			return Object.assign({}, state, {
+				products: []
+			})
 
 		case SEARCH_PRODUCTS_FAILURE:
 			const {errorSearch} = action

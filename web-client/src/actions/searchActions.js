@@ -17,6 +17,13 @@ function searchProductsFailure(errorSearch){
 	}
 }
 
+export const EMPTY_SEARCH = 'empty search'
+function emptySearch(){
+	return {
+		type: EMPTY_SEARCH
+	}
+}
+
 export function searchProduct(params){
 	return function(dispatch){
 		return fetch(`${conf.url}products/search/`+params, {
@@ -24,6 +31,9 @@ export function searchProduct(params){
 		})
 		.then(response => response.json())
 		.then(message => {
+			if(message.message&& message.message === "No product found"){
+				return dispatch(emptySearch())
+			}
 			if(message.error){
 				return dispatch(searchProductsFailure(message.error))
 			}

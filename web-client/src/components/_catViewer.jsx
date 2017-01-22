@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link } from 'react-router' 
+import {browserHistory, Link} from 'react-router'
 
 let i = 0
 class _catViewer extends React.Component {
@@ -23,7 +23,10 @@ class _catViewer extends React.Component {
 					</a>
 
 					<div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<Link to="/" className="dropdown-item">Toutes</Link>
+						<a className="dropdown-item" onClick={() => {
+							this.props.fetchAll()
+                            browserHistory.push('/')
+						}}>Toutes</a>
 						{catsMarkup}
 					</div>
 				</div>

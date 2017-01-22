@@ -8,7 +8,7 @@ class _searchBar extends React.Component {
     handleSubmit = (e) => {
             e.preventDefault()
             this.props.searchProduct(this.refs.search.value)
-            browserHistory.push('/')
+            browserHistory.push('/search/'+this.refs.search.value)
     }
 
     handleClick = (e) => {

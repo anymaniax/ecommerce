@@ -52,6 +52,7 @@ ReactDOM.render(
 				<Route path="cart" component={Cart} />
 				<Route path="login" component={LoginPage} />
 				<Route path="register" component={Register} />
+				<Route path="search/:search" component={ProductsList}/>
 				<Route path="admin" component={requiresAdmin(AdminPanel, store.getState())}>
 					<Route path="users" component={UsersHandler}>
 						<Route path=":id" component={User} />

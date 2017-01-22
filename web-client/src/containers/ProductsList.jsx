@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { fetchAll, fetchProductsByCat, deleteProduct, addToCart } from '../actions'
+import { fetchAll, fetchProductsByCat, deleteProduct, addToCart, searchProduct } from '../actions'
 
 import {_productsList} from '../components'
 
@@ -33,6 +33,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		delete: (id, token) => {
 			dispatch(deleteProduct(id, token))
+		},
+		searchProduct:(search) => {
+			dispatch(searchProduct(search))
 		}
 	}
 }

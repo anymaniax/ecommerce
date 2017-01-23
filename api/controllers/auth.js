@@ -42,32 +42,10 @@ module.exports.auth = (req, res) => {
                 });
 
             } else {
-                User.findOne({
-                    _id: decoded._id
-                }, (err, user) => {
-                    if (err) throw err;
-
-                    if (!user) {
-                        res.json({
-                            success: false,
-                            message: 'Authentication failed.'
-                        })
-                    } else if (user) {
-                        genJWT(user, token => {
-                            res.json({
-                                success: true,
-                                message: 'Enjoy your token!',
-                                token: token
-                            });
-                        })
-                    } else {
-                        res.json({
-                            success: false,
-                            message: 'Authentication failed.'
-                        })
-                    }
-
-                })
+               return res.json({
+                    sucess: true,
+                    message: 'Sucess to Authentication token.'
+                });
             }
         });
     } else {
@@ -106,6 +84,53 @@ module.exports.auth = (req, res) => {
                 });
             }
         });
+    }
+}
+
+module.exports.actu = (req, res) => {
+    let token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        jwt.verify(token, SuperSecret, (err, decoded) => {
+            if (err) {
+                return res.json({
+                    sucess: false,
+                    message: 'Failed to Authentication token.'
+                });
+
+            } else {
+                User.findOne({
+                    _id: decoded._id
+                }, (err, user) => {
+                    if (err) throw err;
+
+                    if (!user) {
+                        res.json({
+                            success: false,
+                            message: 'Authentication failed.'
+                        })
+                    } else if (user) {
+                        genJWT(user, token => {
+                            res.json({
+                                success: true,
+                                message: 'Enjoy your token!',
+                                token: token
+                            });
+                        })
+                    } else {
+                        res.json({
+                            success: false,
+                            message: 'Authentication failed.'
+                        })
+                    }
+
+                })
+            }
+        });
+    } else {
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        })
     }
 }
 

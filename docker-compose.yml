@@ -20,18 +20,6 @@ services:
     links:
       - db
       - es
-  api3:
-    image: api:latest
-    build:
-      context: .
-      dockerfile: api/Dockerfile
-    environment:
-      NODE_ENV: production 
-    ports:
-      - 8081:5000
-    links:
-      - db
-      - es
   api2:
     image: api:latest
     build:
@@ -44,6 +32,18 @@ services:
     links:
       - db
       - es
+  api3:
+    image: api:latest
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      NODE_ENV: production 
+    ports:
+      - 8081:5000
+    links:
+      - db
+      - es
   db:
     image: mongo
     ports:
@@ -53,12 +53,3 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
-  web:
-    image: web-client:latest
-    build:
-      context: .
-      dockerfile: web-client/Dockerfile
-    environment:
-      NODE_ENV: production 
-    ports:
-      - 3000:3000

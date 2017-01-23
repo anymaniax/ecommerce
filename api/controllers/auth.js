@@ -53,32 +53,13 @@ module.exports.auth = (req, res) => {
                             message: 'Authentication failed.'
                         })
                     } else if (user) {
-                        let ByUser = {
-                            _id: user._id,
-                            lastname: user.lastname,
-                            firstname: user.firstname,
-                            username: user.username,
-                            email: user.email,
-                            sex: user.sex,
-                            phone: user.phone,
-                            address: {
-                                street: user.address.street,
-                                number: user.address.number,
-                                town: user.address.town,
-                                postalCode: user.address.postalCode,
-                                country: user.address.country
-                            },
-                            role: user.role
-                        }
-                        let token = jwt.sign(ByUser, SuperSecret, {
-                            expiresIn: "24h"
-                        });
-
-                        res.json({
-                            success: true,
-                            message: 'Enjoy your token!',
-                            token: token
-                        });
+                        genJWT(user, token => {
+                            res.json({
+                                success: true,
+                                message: 'Enjoy your token!',
+                                token: token
+                            });
+                        })
                     } else {
                         res.json({
                             success: false,
@@ -109,32 +90,13 @@ module.exports.auth = (req, res) => {
                 user.comparePassword(req.body.password, function (err, isMatch) {
                     if (err) throw err
                     if (isMatch) {
-                        let ByUser = {
-                            _id: user._id,
-                            lastname: user.lastname,
-                            firstname: user.firstname,
-                            username: user.username,
-                            email: user.email,
-                            sex: user.sex,
-                            phone: user.phone,
-                            address: {
-                                street: user.address.street,
-                                number: user.address.number,
-                                town: user.address.town,
-                                postalCode: user.address.postalCode,
-                                country: user.address.country
-                            },
-                            role: user.role
-                        }
-                        let token = jwt.sign(ByUser, SuperSecret, {
-                            expiresIn: "24h"
-                        });
-
-                        res.json({
-                            success: true,
-                            message: 'Enjoy your token!',
-                            token: token
-                        });
+                        genJWT(user, token => {
+                            res.json({
+                                success: true,
+                                message: 'Enjoy your token!',
+                                token: token
+                            });
+                        })
                     } else {
                         res.json({
                             success: false,

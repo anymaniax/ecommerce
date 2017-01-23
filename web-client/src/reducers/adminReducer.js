@@ -17,7 +17,6 @@ function admin(state = initialState, action){
             })
 
         case FETCH_CAT_SUCCESS:
-            console.log('REDUCER', action)
             return Object.assign({}, state, {
                 cats: action.categories
             })

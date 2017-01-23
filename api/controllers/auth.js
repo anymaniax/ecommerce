@@ -3,6 +3,33 @@ require('../models/db')
 let jwt = require('jsonwebtoken');
 let User = require('../models/user')
 
+const genJWT = (user, callback) => {
+    const _userFields = {
+        _id: user._id,
+        lastname: user.lastname,
+        firstname: user.firstname,
+        username: user.username,
+        email: user.email,
+        sex: user.sex,
+        phone: user.phone,
+        address: {
+            street: user.address.street,
+            number: user.address.number,
+            town: user.address.town,
+            postalCode: user.address.postalCode,
+            country: user.address.country
+        },
+        role: user.role
+    }
+
+    const token = jwt.sign(_userFields, SuperSecret, {
+        expiresIn: "72h"
+    })
+
+    callback(token)
+}
+
+module.exports.genJWT = genJWT
 
 module.exports.auth = (req, res) => {
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -63,11 +90,12 @@ module.exports.auth = (req, res) => {
             }
         });
     } else {
+        const username = new RegExp(req.body.username, 'i')
         User.findOne({
             $or: [{
-                'username': req.body.username
+                'username': { $regex : username }
             }, {
-                'email': req.body.username
+                'email': { $regex : username }
             }]
         }, (err, user) => {
             if (err) throw err;
@@ -145,8 +173,7 @@ module.exports.checkToken = (req, res, next) => {
 
 
 module.exports.requireAdmin = (req, res, next) => {
-    console.log(req.decode);
-    if (!req.decode || req.decode.role !== 'admin') {
+    if(!req.decode || req.decode.role !== 'admin'){
         return res.json({
             success: false,
             message: 'This route can only be accessed by an administrator'

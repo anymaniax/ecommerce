@@ -11,7 +11,6 @@ class _categories extends React.Component {
     }
 
     componentWillMount(){
-        console.log('WHY HELLO THERE\n------------------')
         this.props.fetchCats()
     }
 

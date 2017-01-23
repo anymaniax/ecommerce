@@ -29,6 +29,9 @@ function auth(state = initialState, action){
 
 		case REGISTER_SUCCESS:
 			return Object.assign({}, state, {
+				authenticated: true,
+                user: jwtDecode(action.token),
+                token: action.token,
 				link: action.link
 			})
 

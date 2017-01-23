@@ -34,4 +34,7 @@ export {fetchUserList,
 		fetchCategories,
 		FETCH_CAT_SUCCESS,
     	deleteCategory,
-    	addCategory} from './adminUsersActions'
+    	addCategory,
+    	deleteUser,
+    	makeAdmin,
+		removeAdmin} from './adminUsersActions'

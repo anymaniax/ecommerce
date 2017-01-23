@@ -1,6 +1,7 @@
 require('../models/db')
 
 let User = require('../models/user')
+let Auth = require('../controllers/auth')
 
 let bcrypt = require('bcryptjs');
 
@@ -113,10 +114,12 @@ module.exports.addUser = (req, res) => {
                                 error: "Could not create this user"
                             })
                         }
-
-                        res.status(200)
-                        return res.send({
-                            link: `http://localhost:${PORT}/api/v1/users/${user.id}`
+                        Auth.genJWT(user, token => {
+                            res.status(200)
+                            return res.json({
+                                link: `http://localhost:${PORT}/api/v1/users/${user.id}`,
+                                token
+                            })
                         })
                     })
                 });
@@ -343,5 +346,59 @@ module.exports.updatePass = (req, res) => {
             }
         });
 
+    })
+}
+
+module.exports.makeAdmin = (req, res) => {
+    if(!req.body.id){
+        res.status(500)
+        return res.json({
+            success: false,
+            error: "No uid provided"
+        })
+    }
+
+    User.findById(req.body.id, (err, user) => {
+        if(err){
+            res.status(500)
+            return res.json({
+                success: false,
+                error: "MongoDB error"
+            })
+        }
+
+        user.role = 'admin'
+        user.save()
+        res.status(200)
+        return res.json({
+            success: true
+        })
+    })
+}
+
+module.exports.removeAdmin = (req, res) => {
+    if(!req.body.id){
+        res.status(500)
+        return res.json({
+            success: false,
+            error: "No uid provided"
+        })
+    }
+
+    User.findById(req.body.id, (err, user) => {
+        if(err){
+            res.status(500)
+            return res.json({
+                success: false,
+                error: "MongoDB error"
+            })
+        }
+
+        user.role = 'user'
+        user.save()
+        res.status(200)
+        return res.json({
+            success: true
+        })
     })
 }

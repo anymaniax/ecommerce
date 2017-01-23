@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+import {Link, browserHistory} from 'react-router'
 
 import {Loader} from './_loader'
 
@@ -10,6 +10,18 @@ export default class _loginPage extends Component {
 		this.state = {
 			login: '',
 			password: ''
+		}
+	}
+
+	componentWillMount(){
+		if(this.props.authenticated){
+			browserHistory.push('/')
+		}
+	}
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.authenticated){
+			browserHistory.push('/')
 		}
 	}
 

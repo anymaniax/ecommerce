@@ -3,17 +3,22 @@ import {connect} from 'react-redux'
 import {fetchUserList} from '../../actions'
 import {_usersHandler} from '../../components'
 
-const mapStateToProps = ({admin}) => {
+let token;
+
+const mapStateToProps = ({admin, auth}) => {
     const {users} = admin
+    const {token} = auth
+
     return {
-        users
+        users,
+        token
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchUsers: () => {
-            dispatch(fetchUserList())
+        fetchUsers: (token) => {
+            dispatch(fetchUserList(token))
         }
     }
 }

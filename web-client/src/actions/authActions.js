@@ -19,10 +19,12 @@ function loginFailure(error){
 }
 
 export const REGISTER_SUCCESS = 'register success'
-function registerSuccess(link){
+function registerSuccess(json){
+	const {link, token} = json
 	return {
 		type: REGISTER_SUCCESS,
-		link
+		link,
+		token
 	}
 }
 
@@ -99,7 +101,7 @@ export function register(user){
 				dispatch(registerFailure(json.error))
 				return dispatch(finishLoading())
 			}
-			dispatch(registerSuccess(json.link))
+			dispatch(registerSuccess(json))
 			dispatch(finishLoading())
 		})
 	}

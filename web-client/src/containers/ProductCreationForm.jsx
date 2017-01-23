@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 
 import {_productCreationForm} from '../components'
 
-import {createProduct} from '../actions'
+import {createProduct, fetchCats} from '../actions'
 
 const mapStateToProps = ({api, productCreation, auth}) => {
 	const {cats} = api
@@ -23,6 +23,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		create: (product, token) => {
 			dispatch(createProduct(product, token))
+		}, fetchCats: () => {
+			dispatch(fetchCats())
 		}
 	}
 }

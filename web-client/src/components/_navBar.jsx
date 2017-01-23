@@ -22,23 +22,18 @@ const _navBar = (props) => {
 							<CartViewer className="nav-link" />
 						</li>}
 
-					{props.user.role === 'admin' && (
-						<span>
-							<li className="nav-item">
-								<Link to='/productCreation' className="nav-link">| Ajouter un produit +</Link>
-							</li>
-							<li className="nav-item">
-								<Link to='/cats' className="nav-link"> | Catégories +  |  </Link>
-							</li>
-						</span>
-					)}
+                    {props.user.role === 'admin' &&
+					<li className="nav-item">
+						<Link to='/admin' className="nav-link">Panel administrateur</Link>
+					</li>
+                    }
 					{!props.authenticated ? 
 						<li className="nav-item">
 							<Link to='/login' className="nav-link">Se connecter</Link> 
 						</li>
 						:
 						<li className="nav-item">
-							<span className="nav-link">Bienvenu {props.user.username} <span className="span-button" onClick={() => props.logout()}><i className="fa fa-sign-out" aria-hidden="true"></i></span></span>
+							<span className="nav-link">Bonjour <Link to="/profile" style={{color:"rgb(126, 183, 234)"}}>{props.user.username}</Link> <span className="span-button" onClick={() => props.logout()}><i className="fa fa-sign-out" aria-hidden="true"></i></span></span>
 						</li>
 					}
 					{props.hideDefault ||<li>

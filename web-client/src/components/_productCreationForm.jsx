@@ -23,6 +23,10 @@ class _productCreationForm extends Component {
 		}
 	}
 
+	componentWillMount(){
+		this.props.fetchCats();
+	}
+
 	handleName = (e) => {
 		this.setState({
 			nom: e.target.value

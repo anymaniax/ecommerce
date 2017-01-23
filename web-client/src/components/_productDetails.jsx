@@ -30,16 +30,16 @@ class _ProductDetails extends React.Component  {
 						</div>
 						<div className={this.props.hideLink ? "row" : ""}>
 							<hr className="my-4" />
-							<p>{`Prix: ${formater(details.price.value) || ''} ${details.price.currency || ''}`}</p>
+							<p><strong>{`Prix: ${formater(details.price.value) || ''} ${details.price.currency || ''}`}</strong></p>
 							<p>{details.desc || ''}</p>
-							<div className="btn-group">
+							{!this.props.hideLink && <div className="btn-group">
 								<button className="btn btn-secondary">Ajouter au panier</button>
 								{this.props.role === 'admin' &&
 									<button className="btn btn-secondary">
 										supprimer
 									</button>
 								}
-							</div>
+							</div>}
 						</div>
 					</div>
 					:

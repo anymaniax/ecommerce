@@ -93,7 +93,7 @@ module.exports.updateProduct = (req, res) => {
 	Product.update({
 		_id: req.params.id
 	}, {
-		$set: req.body
+		$set: req.body.product
 	}, (err, product) => {
 		if (err) {
 			res.status(500)
@@ -101,6 +101,7 @@ module.exports.updateProduct = (req, res) => {
 		}
 
 		res.status(204)
+		console.log(product)
 		res.json({
 			message: "Product updated with success",
 			product

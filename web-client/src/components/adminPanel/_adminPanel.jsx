@@ -9,6 +9,7 @@ class _adminPanel extends Component {
                 <ul>
                     <li><Link to="/admin/users">Gestion des utilisateurs</Link></li>
                     <li><Link to="/admin/categories">Gestion des catégories</Link></li>
+                    <li><Link to="/admin/products">Gestion des produits</Link></li>
                 </ul>
                 {this.props.children}
             </div>

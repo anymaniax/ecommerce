@@ -1,6 +1,12 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
 
+import {Alert} from './'
+
+import fetch from 'isomorphic-fetch'
+
+import conf from '../config/conf.json'
+
 import {NavBar} from '../containers'
 import {_productDetails as ProductDetails} from '../components'
 
@@ -25,6 +31,21 @@ class _productCreationForm extends Component {
 
 	componentWillMount(){
 		this.props.fetchCats();
+		if(this.props.params.id){
+			this.props.fetchCurrent(this.props.params.id)
+		}
+	}
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.current){
+			this.setState(nextProps.current)
+		}
+	}
+
+	hideAlert(){
+		if(this.props.params.id){
+			this.props.hideAlert()
+		}
 	}
 
 	handleName = (e) => {
@@ -70,12 +91,17 @@ class _productCreationForm extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault()
+        this.hideAlert()
 		this.postData()
 	}
 
 	postData = () => {
-		this.props.create(this.state, this.props.token)
-	}
+        if(!this.props.params){
+            this.props.create(this.state, this.props.token)
+        } else {
+			this.props.update(this.state, this.props.token)
+        }
+    }
 
 	render(){
 		let errorMarkup
@@ -104,14 +130,29 @@ class _productCreationForm extends Component {
 					<div className="row">
 						<div className="col-md-6">
 							<form onSubmit={this.handleSubmit}>
-								<h2>Création d'un produit</h2>
+								{!this.props.params ?
+									<h2>Création d'un produit</h2>
+									:
+									<h2>Modification d'un produit</h2>
+								}
 								{errorMarkup}
+								{this.props.params &&
+									<div className="form-group">
+										<label htmlFor="productName">_id</label>
+										<input
+											type="text"
+											className="form-control disabled"
+											placeholder="id"
+											disabled
+											value={this.state._id}/>
+									</div>
+								}
 								<div className="form-group">
 									<label htmlFor="productName">Nom</label>
-									<input 
-										type="text" 
-										className="form-control" 
-										id="productName" 
+									<input
+										type="text"
+										className="form-control"
+										id="productName"
 										placeholder="Nom"
 										value={this.state.nom}
 										onChange={this.handleName} />
@@ -165,8 +206,13 @@ class _productCreationForm extends Component {
 									</select>
 								</div>
 
+
 								<div className="form-group">
- 									 <button type="submit" className="btn btn-primary">Ajouter</button>
+									{!this.props.params ?
+ 									 	<button type="submit" className="btn btn-block btn-primary">Ajouter</button>
+										 :
+										<button type="submit" className="btn btn-block btn-warning">Modifier</button>
+									}
 								</div>
 							</form>
 						</div>
@@ -178,6 +224,13 @@ class _productCreationForm extends Component {
 						</div>
 					</div>
 					<div className="row">
+                        {this.props.shouldDisplayAlert &&
+							<Alert
+								type={this.props.alertType}
+								short={this.props.alertShort}
+								details={this.props.alertDetails}
+							/>
+                        }
 						{linkMarkup}
 					</div>
 				</div>

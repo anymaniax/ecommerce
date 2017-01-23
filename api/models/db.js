@@ -71,4 +71,5 @@ InfoPaypal = config.paypal
 User = require('./user')
 Product = require('./product')
 Cat = require('./cat')
+Transaction = require('./transaction')
 Pay = require('./pay')

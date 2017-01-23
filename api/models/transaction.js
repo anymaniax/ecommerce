@@ -1,6 +1,6 @@
 let mongoose = require('mongoose')
 
-let paySchema = new mongoose.Schema({
+let transactionSchema = new mongoose.Schema({
     amount: {
         type: Number,
         required: true
@@ -9,18 +9,15 @@ let paySchema = new mongoose.Schema({
         type: [JSON],
         required: true
     },
-    token: {
-        type: String,
-        required:true
-    },
-    payerId: {
-        type: String,
-        required:true
-    },
     userId: {
         type: String,
         required: true
-    }
+    },
+    createdAt: {
+		type: Date,
+		default: Date.now,
+        expires: '15m'
+	}
 })
 
-module.exports = mongoose.model('Pay', paySchema)
+module.exports = mongoose.model('Transaction', transactionSchema)

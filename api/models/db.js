@@ -65,6 +65,7 @@ process.on('SIGTERM', () => {
 
 SuperSecret = config.secret
 Salt = config.salt
+InfoPaypal = config.paypal
 
 //Schemas
 User = require('./user')

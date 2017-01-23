@@ -7,14 +7,23 @@ let paySchema = new mongoose.Schema({
         required: true
     },
     cart: {
-        type: [String],
+        type: [JSON],
         required: true
     },
     token: {
         type: String
     },
-    payerid: {
+    payerId: {
         type: String
+    },
+    userId: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: Boolean,
+        required:true,
+        default: false
     }
 })
 

@@ -31,7 +31,7 @@ module.exports.getAll = (req, res) => {
 
 module.exports.getAllWithDetails = (req, res) => {
 	Cat.find((err, cats) => {
-		if(cats.length === 0){
+		if (cats.length === 0) {
 			res.status(404)
 			return res.json({
 				err: "No category was found",
@@ -39,7 +39,7 @@ module.exports.getAllWithDetails = (req, res) => {
 			})
 		}
 
-		if(err){
+		if (err) {
 			res.status(500)
 			return res.json({
 				err: "An unexpected error happened"
@@ -53,21 +53,29 @@ module.exports.getAllWithDetails = (req, res) => {
 }
 
 module.exports.addCat = (req, res) => {
-	Cat.findOne({'nom':req.body.nom},(err,cats) =>{
+	Cat.findOne({
+		'nom': req.body.nom
+	}, (err, cats) => {
 		if (err) {
 			res.status(500)
 			return res.json({
 				err: "An unexpected error happened"
 			})
 		}
-		if(cats){
+		if (cats) {
 			return res.json({
 				error: "Category already use"
 			})
 		} else {
 			let cat = Cat(req.body)
-			cat.save((err,cat)=>{
-				console.log('TEST', err)
+			cat.save((err, cat) => {
+				if (err) {
+					res.status(406)
+					console.log(err)
+					return res.json({
+						error: "Could not create this category"
+					})
+				}
 				res.status(201)
 				res.send({
 					link: `http://localhost:${PORT}/api/v1/cats/${cat.nom}`
@@ -104,10 +112,10 @@ module.exports.deleteCatCascade = (req, res) => {
 	Cat.findOneAndRemove({
 		'_id': req.params.id
 	}, () => {
-        res.status(204)
-        res.json({
-            success: true,
-            message: 'category deleted with success'
-        })
-    })
+		res.status(204)
+		res.json({
+			success: true,
+			message: 'category deleted with success'
+		})
+	})
 }

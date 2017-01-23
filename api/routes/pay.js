@@ -3,6 +3,6 @@ let ctrl = require('../controllers/pay')
 let auth = require('../controllers/auth')
 
 router.post('/:id', auth.checkToken, ctrl.pay)
-router.post('/detail/:id', auth.checkToken, ctrl.detail)
+router.get('/:id', ctrl.detail)
 
 module.exports = router

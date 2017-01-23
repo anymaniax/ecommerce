@@ -66,6 +66,41 @@ export function deleteProduct(id, token, cat = 'all'){
     }
 }
 
+export const PRODUCT_UPDATE_SUCCESS = 'product update success'
+function productUpdateSuccess(){
+	return {
+		type: PRODUCT_UPDATE_SUCCESS
+	}
+}
+
+export const PRODUCT_UPDATE_FAILURE = 'product update failure'
+function productUpdateFailure(){
+    return {
+        type: PRODUCT_UPDATE_FAILURE
+    }
+}
+
+export function updateProduct(product, token){
+	return function(dispatch){
+		return fetch(`${conf.url}products/${product._id}`, {
+			method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }, body: JSON.stringify({
+            	product
+            })
+		}).then(response => {
+			if(response.status === 204){
+				dispatch(productUpdateSuccess())
+			} else {
+				dispatch(productUpdateFailure())
+			}
+		})
+	}
+}
+
 export function fetchCats(){
 	return function(dispatch){
 		return fetch(`${conf.url}cats/`)

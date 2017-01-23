@@ -16,7 +16,10 @@ export {RECEIVE_PRODUCTS,
 		fetchById,
 		fetchCats,
 		fetchProductsByCat,
-		deleteProduct} from './apiActions'
+		deleteProduct,
+    	updateProduct,
+		PRODUCT_UPDATE_FAILURE,
+		PRODUCT_UPDATE_SUCCESS} from './apiActions'
 
 export {SEARCH_PRODUCTS_SUCCESS,
 		SEARCH_PRODUCTS_FAILURE,
@@ -47,3 +50,4 @@ export {fetchUserList,
     	deleteUser,
     	makeAdmin,
 		removeAdmin} from './adminUsersActions'
+

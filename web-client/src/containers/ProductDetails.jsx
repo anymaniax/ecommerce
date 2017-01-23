@@ -4,10 +4,12 @@ import {_productDetails} from '../components'
 
 import { fetchById } from '../actions'
 
-const mapStateToProps = (state) => {
-	let {details} = state.api
+const mapStateToProps = ({api, auth}) => {
+	let {details} = api
+	let {role} = auth.user
 	return {
-		details
+		details,
+		role
 	}
 }
 

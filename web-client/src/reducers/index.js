@@ -7,6 +7,7 @@ import auth from './authReducer'
 import search from './searchReducer'
 import admin from './adminReducer'
 import passwordUpdate from './passwordUpdateReducer'
+import productUpdate from './productUpdateReducer'
 
 const reducers = combineReducers({
 	cart,
@@ -15,7 +16,8 @@ const reducers = combineReducers({
 	search,
 	auth,
 	admin,
-	passwordUpdate
+	passwordUpdate,
+    productUpdate
 })
 
 export default reducers

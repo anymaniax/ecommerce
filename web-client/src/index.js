@@ -8,7 +8,8 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './App';
 import {ProductsList, ProductDetails, ProductCreationForm, Cart,
 	LoginPage, AdminPanel, UsersHandler, CatsHandler,
-	User, Register, Profile} from './containers'
+	User, Register, Profile, ProductsHandler,
+    ProductUpdateForm} from './containers'
 
 import reducers from './reducers'
 import {loadState, saveState} from './models/localStorage'
@@ -57,8 +58,10 @@ ReactDOM.render(
 					<Route path="users" component={UsersHandler}>
 						<Route path=":id" component={User} />
 					</Route>
-					<Route path="categories" component={CatsHandler}>
-					</Route>
+					<Route path="categories" component={CatsHandler} />
+					<Route path="products" component={ProductsHandler} />
+					<Route path="products/create" component={ProductCreationForm} />
+					<Route path="products/update/:id" component={ProductUpdateForm} />
 				</Route>
 				<Route path="profile" component={Profile} />
 			</Route>

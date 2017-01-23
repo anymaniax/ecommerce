@@ -70,3 +70,4 @@ Salt = config.salt
 User = require('./user')
 Product = require('./product')
 Cat = require('./cat')
+Pay = require('./pay')

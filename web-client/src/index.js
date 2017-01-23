@@ -8,7 +8,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './App';
 import {ProductsList, ProductDetails, ProductCreationForm, Cart,
 	LoginPage, AdminPanel, UsersHandler, CatsHandler,
-	User, Register} from './containers'
+	User, Register, Profile} from './containers'
 
 import reducers from './reducers'
 import {loadState, saveState} from './models/localStorage'
@@ -60,6 +60,7 @@ ReactDOM.render(
 					<Route path="categories" component={CatsHandler}>
 					</Route>
 				</Route>
+				<Route path="profile" component={Profile} />
 			</Route>
 			<Route path="/productCreation">
 				<IndexRoute component={requiresAdmin(ProductCreationForm, store.getState())} />

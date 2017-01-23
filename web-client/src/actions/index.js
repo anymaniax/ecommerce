@@ -27,7 +27,16 @@ export {LOGIN_SUCCESS,
 		LOGIN_FAILURE,
 		fetchToken,
 		logout,
-		LOGOUT} from './authActions'
+		LOGOUT,
+		changePassword,
+		PASSWORD_UPDATE_SUCCESSS,
+		PASSWORD_UPDATE_FAILURE,
+		HIDE_ALERT,
+		SHOW_ALERT,
+		hideAlert,
+		showAlert,
+		START_LOADING,
+		FINISH_LOADING} from './authActions'
 
 export {fetchUserList,
     	USER_LIST_SUCCESS,

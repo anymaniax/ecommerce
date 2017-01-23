@@ -32,17 +32,17 @@ class _ProductList extends React.Component {
 	render() {
 		const admin = this.props.user.role === 'admin' ? true : false
 		let productMarkup = this.props.products.map((e) => {
-			if(e === null){
-				return
+			if(e !== null){
+				return (
+					<ProductListItem
+						admin={admin}
+						key={e._id}
+						product={e}
+						addToCart={() => this.props.addToCart(e)}
+						delete={() => this.props.delete(e._id, this.props.token)} />
+                )
 			}
-			return (
-				<ProductListItem
-					admin={admin}
-					key={e._id}
-					product={e}
-					addToCart={() => this.props.addToCart(e)}
-					delete={() => this.props.delete(e._id, this.props.token)} />
-			)
+			return undefined
 		})
 
 		return (

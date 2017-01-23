@@ -106,3 +106,60 @@ export function register(user){
 		})
 	}
 }
+
+export const PASSWORD_UPDATE_SUCCESSS = 'passwd update success'
+export function passwordUpdateSuccess(){
+	return {
+		type: PASSWORD_UPDATE_SUCCESSS
+	}
+}
+
+export const PASSWORD_UPDATE_FAILURE = 'passwd update failure'
+export function passwordUpdateFailure(){
+	return {
+		type: PASSWORD_UPDATE_FAILURE
+	}
+}
+
+export function changePassword(id, password, newPassword, token){
+	return function(dispatch){
+		dispatch(startLoading())
+		return fetch(`${conf.url}users/pass/${id}`, {
+			method: 'POST',
+			headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'x-access-token': token
+            }, body: JSON.stringify({
+            	password,
+				newPassword
+			})
+		}).then(response => {
+			if(response.status === 204){
+				dispatch(passwordUpdateSuccess())
+				dispatch(finishLoading())
+			} else {
+				dispatch(passwordUpdateFailure())
+                dispatch(finishLoading())
+			}
+		})
+	}
+}
+
+export const HIDE_ALERT = 'hide alert'
+export function hideAlert(){
+	return {
+		type: HIDE_ALERT
+	}
+}
+
+export const SHOW_ALERT = 'show alert'
+export function showAlert(alertShort, alertDetails, alertType){
+    return {
+        type: SHOW_ALERT,
+        alertShort,
+		alertDetails,
+		alertType
+    }
+}
+

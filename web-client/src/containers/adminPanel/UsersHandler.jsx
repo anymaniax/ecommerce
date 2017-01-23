@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import {fetchUserList} from '../../actions'
 import {_usersHandler} from '../../components'
 
-let token;
-
 const mapStateToProps = ({admin, auth}) => {
     const {users} = admin
     const {token} = auth

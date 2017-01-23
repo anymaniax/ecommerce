@@ -332,7 +332,7 @@ module.exports.updatePass = (req, res) => {
                     bcrypt.hash(password, salt, function (err, hash) {
                         user.password = hash
                         user.save()
-                        res.status(200)
+                        res.status(204)
                         return res.json({
                             message: "Password updated with success"
                         })

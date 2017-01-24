@@ -160,29 +160,19 @@ export function addressUpdateFailure(){
 	}
 }
 
-export function changeAddress(id, lastname, firstname, street, number, town, postalCode, country, sex, phone, token){
+export function changeAddress(user, state, token){
 	return function(dispatch){
 		dispatch(startLoading())
-		return fetch(`${conf.url}users/${id}`, {
+		const newUser = Object.assign({}, user, {
+			address: state
+		})
+		return fetch(`${conf.url}users/${user._id}`, {
 			method: 'PUT',
 			headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
 				'x-access-token': token
-            }, body: JSON.stringify({
-				lastname,
-				firstname,
-				address:{
-					street,
-					number,
-					town,
-					postalCode,
-					country,
-				},
-				sex,
-				phone,
-				token
-			})
+            }, body: JSON.stringify(newUser)
 		}).then(response => {
 			if(response.status === 200){
 				dispatch(addressUpdateSuccess())

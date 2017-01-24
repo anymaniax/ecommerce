@@ -142,7 +142,6 @@ module.exports.delUser = (req, res) => {
 }
 
 module.exports.updateUser = (req, res) => {
-    console.log(req.body);
     User.findOne({
         '_id': req.params.id
     }, (err, user) => {

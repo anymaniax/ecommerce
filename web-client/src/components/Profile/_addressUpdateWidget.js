@@ -65,7 +65,7 @@ class _addressUpdateWidget extends Component {
             return this.props.showAlert('Oops !', 'Tous les champs doivent être remplis!', 'warning')
         }
 
-        return this.props.changeAddress(_id, this.props.user.lastname, this.props.user.firstname ,street, number, town, postalCode, country, this.props.user.sex, this.props.user.phone, token)
+        return this.props.changeAddress(this.props.user, this.state, token)
     }
 
     render() {

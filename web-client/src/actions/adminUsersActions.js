@@ -1,6 +1,3 @@
-/**
- * Created by antonio on 28/12/16.
- */
 import fetch from 'isomorphic-fetch'
 
 import conf from '../config/conf'

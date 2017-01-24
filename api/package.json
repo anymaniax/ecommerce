@@ -14,6 +14,7 @@
     "jsonwebtoken": "^7.1.9",
     "mongoosastic": "^4.2.1",
     "mongoose": "^4.6.6",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "paypal-express-checkout": "^1.5.0"
   }
 }

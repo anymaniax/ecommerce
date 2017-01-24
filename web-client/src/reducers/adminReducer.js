@@ -1,6 +1,3 @@
-/**
- * Created by antonio on 29/12/16.
- */
 import {USER_LIST_SUCCESS, FETCH_CAT_SUCCESS} from '../actions'
 
 const initialState = {

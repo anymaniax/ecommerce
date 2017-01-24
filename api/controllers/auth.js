@@ -32,7 +32,7 @@ const genJWT = (user, callback) => {
 module.exports.genJWT = genJWT
 
 module.exports.auth = (req, res) => {
-    let token = req.body.token || req.query.token || req.headers['x-access-token'];
+    let token = req.body.token || req.query.token || req.headers['x-access-token']
     if (token) {
         jwt.verify(token, SuperSecret, (err, decoded) => {
             if (err) {
@@ -88,7 +88,7 @@ module.exports.auth = (req, res) => {
 }
 
 module.exports.actu = (req, res) => {
-    let token = req.body.token || req.query.token || req.headers['x-access-token'];
+    let token = req.body.token || req.query.token || req.headers['x-access-token']
     if (token) {
         jwt.verify(token, SuperSecret, (err, decoded) => {
             if (err) {
@@ -135,7 +135,7 @@ module.exports.actu = (req, res) => {
 }
 
 module.exports.checkToken = (req, res, next) => {
-    let token = req.body.token || req.query.token || req.headers['x-access-token'];
+    let token = req.body.token || req.query.token || req.headers['x-access-token']
     if (token) {
         jwt.verify(token, SuperSecret, (err, decoded) => {
             if (err) {

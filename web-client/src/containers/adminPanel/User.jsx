@@ -1,6 +1,3 @@
-/**
- * Created by antonio on 13/01/17.
- */
 import {connect} from 'react-redux'
 import React from 'react'
 

@@ -1,6 +1,3 @@
-/**
- * Created by antonio on 13/01/17.
- */
 import React from 'react'
 import {Link} from 'react-router'
 const adminHOC = (WrappedComponent, state) => {

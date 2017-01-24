@@ -157,7 +157,33 @@ module.exports.valid = (req, res) => {
     }
 }
 
-module.exports.getByIdPayement = (req, res) => {
+module.exports.getById = (req, res) => {
+    Pay.findOne({
+        "_id": req.params.id
+    }, (err, pay) => {
+        if (!pay) {
+            res.status(404)
+            res.json({
+                err: "No payement found :("
+            })
+        }
+
+        if (err) {
+            res.status(500)
+            return res.json({
+                err: "An unexpect error happened"
+            })
+        }
+
+        let ByPay= {
+               cart: pay.cart
+            }
+        return res.json(ByPay)
+    })
+}
+
+
+module.exports.getByUserPayement = (req, res) => {
     Pay.find({
         "userId": req.params.id
     }, (err, pay) => {

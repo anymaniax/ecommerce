@@ -7,7 +7,8 @@ const authMixin = [auth.checkToken, auth.requireAdmin]
 
 router.post('/:id', authId, ctrl.pay)
 router.get('/valid/:id', ctrl.valid)
-router.get('/payement/:id', authId,ctrl.getByIdPayement)
-router.get('/allPayement/', authMixin, ctrl.getAllPayement)
+router.get('/payements', authId, ctrl.getById)
+router.get('/payements/user/:id', authId, ctrl.getByUserPayement)
+router.get('/payements/all/', authMixin, ctrl.getAllPayement)
 
 module.exports = router

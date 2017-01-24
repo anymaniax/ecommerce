@@ -37,14 +37,14 @@ function registerFailure(error){
 }
 
 export const START_LOADING = 'start login'
-function startLoading(){
+export function startLoading(){
 	return {
 		type: START_LOADING
 	}
 }
 
 export const FINISH_LOADING = 'finish loading'
-function finishLoading(){
+export function finishLoading(){
 	return {
 		type: FINISH_LOADING
 	}

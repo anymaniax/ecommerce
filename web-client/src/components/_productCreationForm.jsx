@@ -3,10 +3,6 @@ import {Link} from 'react-router'
 
 import {Alert} from './'
 
-import fetch from 'isomorphic-fetch'
-
-import conf from '../config/conf.json'
-
 import {NavBar} from '../containers'
 import {_productDetails as ProductDetails} from '../components'
 
@@ -25,7 +21,7 @@ class _productCreationForm extends Component {
 			cat: [],
 			tags: [],
 			stock: 42,
-			thumbnail: 'http://lorempixel.com/g/200/200/'
+			thumbnail: 'http://lorempixel.com/g/200/200/cats'
 		}
 	}
 
@@ -96,7 +92,7 @@ class _productCreationForm extends Component {
 	}
 
 	postData = () => {
-        if(!this.props.params){
+        if(!this.props.params.id){
             this.props.create(this.state, this.props.token)
         } else {
 			this.props.update(this.state, this.props.token)
@@ -130,13 +126,13 @@ class _productCreationForm extends Component {
 					<div className="row">
 						<div className="col-md-6">
 							<form onSubmit={this.handleSubmit}>
-								{!this.props.params ?
+								{!this.props.params.id ?
 									<h2>Création d'un produit</h2>
 									:
 									<h2>Modification d'un produit</h2>
 								}
 								{errorMarkup}
-								{this.props.params &&
+								{this.props.params.id &&
 									<div className="form-group">
 										<label htmlFor="productName">_id</label>
 										<input
@@ -208,7 +204,7 @@ class _productCreationForm extends Component {
 
 
 								<div className="form-group">
-									{!this.props.params ?
+									{!this.props.params.id ?
  									 	<button type="submit" className="btn btn-block btn-primary">Ajouter</button>
 										 :
 										<button type="submit" className="btn btn-block btn-warning">Modifier</button>

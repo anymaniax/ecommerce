@@ -36,6 +36,14 @@ class ProductHandler extends Component {
                 <div className="col-md-12">
                     <h2>Liste des produits</h2>
                 </div>
+                <div className="card col-md-3" style={{margin: "5px"}}>
+                    <p className="lead">Ajouter un nouveau produit</p>
+                    <Link
+                        to="/admin/products/create"
+                        className="btn btn-secondary">
+                        <i className="fa fa-plus" aria-hidden="true"></i>
+                    </Link>
+                </div>
                 {products.map(e =>
                     <ProductItem
                         deleteP={(id) => {

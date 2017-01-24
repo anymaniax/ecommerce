@@ -41,6 +41,9 @@ class _passwordUpdateWidget extends Component {
                     newPass2: value
                 })
                 break
+
+            default:
+                return
         }
     }
 
@@ -53,7 +56,7 @@ class _passwordUpdateWidget extends Component {
             return this.props.showAlert('Oops !', 'Tous les champs doivent être remplis!', 'warning')
         }
 
-        if(newPass != newPass2){
+        if(newPass !== newPass2){
             return this.props.showAlert('Oops !', 'Les passwords ne correspondent pas!', 'warning')
         }
 

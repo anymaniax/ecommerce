@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 
 import {formater} from '../models/priceFormater'
 
@@ -55,7 +56,9 @@ const _cart = (props) => {
 		<div>
 			<h2 className="text-xs-right display-4">Total: {price}€</h2>
 			{productsMarkup}
-			<button onClick={() => props.reset()} className="btn btn-primary btn-lg btn-block">Vider le Panier{' '}<i className="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+			<button onClick={() => props.reset()} className="btn btn-warning btn-lg btn-block">Vider le Panier{' '}<i className="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+
+			<Link to='/checkout' className="btn btn-primary btn-lg btn-block">Procéder au payement{' '}<i className="fa fa-credit-card" aria-hidden="true"></i></Link>
 		</div>
 	)
 }

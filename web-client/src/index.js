@@ -9,7 +9,9 @@ import App from './App';
 import {ProductsList, ProductDetails, ProductCreationForm, Cart,
 	LoginPage, AdminPanel, UsersHandler, CatsHandler,
 	User, Register, Profile, ProductsHandler,
-    ProductUpdateForm} from './containers'
+    ProductUpdateForm, Confirmation, SuccessCheckout} from './containers'
+
+import {_checkout, _confirmation, _errorCheckout, _successCheckout} from './components'
 
 import reducers from './reducers'
 import {loadState, saveState} from './models/localStorage'
@@ -64,6 +66,12 @@ ReactDOM.render(
 					<Route path="products/update/:id" component={ProductUpdateForm} />
 				</Route>
 				<Route path="profile" component={Profile} />
+
+				<Route path="checkout" component={_checkout}>
+					<IndexRoute component={Confirmation}/>
+					<Route path="success/:transactionId" component={SuccessCheckout} />
+					<Route path="error" component={_errorCheckout} />
+				</Route>
 			</Route>
 			<Route path="/productCreation">
 				<IndexRoute component={requiresAdmin(ProductCreationForm, store.getState())} />

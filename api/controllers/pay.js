@@ -33,7 +33,7 @@ module.exports.pay = (req, res) => {
                     let transaction = Transaction({
                         "amount": price,
                         "cart": cart,
-                        "userId": req.body.id
+                        "userId": req.params.id
                     })
                     transaction.save((err, pay) => {
                         if (err) {
@@ -89,7 +89,7 @@ module.exports.valid = (req, res) => {
                         if (err) {
                             console.log(err)
                             res.status(500)
-                            res.redirect('http://localhost:3000/')
+                            res.redirect('http://localhost:3000/checkout/error')
                         }
                         let pay = Pay({
                             "amount": transaction.amount,
@@ -103,11 +103,11 @@ module.exports.valid = (req, res) => {
                                 res.status(406)
                                 console.log(err)
                                 res.status(500)
-                                res.redirect('http://localhost:3000/')
+                                res.redirect('http://localhost:3000/checkout/error')
                             }
                             transaction.remove();
                             res.status(204)
-                            res.redirect('http://localhost:3000/')
+                            res.redirect(`http://localhost:3000/checkout/success/${pay._id}`)
                         })
                     })
                 } else {
@@ -116,11 +116,11 @@ module.exports.valid = (req, res) => {
                     }, (err, transaction) => {
                         if (err) {
                             res.status(500)
-                            res.redirect('http://localhost:3000/')
+                            res.redirect('http://localhost:3000/checkout/error')
                         }
 
                         res.status(204)
-                        res.redirect('http://localhost:3000/')
+                        res.redirect('http://localhost:3000/checkout/error')
                     })
                 }
 
@@ -133,11 +133,11 @@ module.exports.valid = (req, res) => {
                 if (err) {
                     console.log(err)
                     res.status(500)
-                    res.redirect('http://localhost:3000/')
+                    res.redirect('http://localhost:3000/checkout/error')
                 }
 
                 res.status(204)
-                res.redirect('http://localhost:3000/')
+                res.redirect('http://localhost:3000/checkout/error')
             })
         } else {
             return res.json({
@@ -206,4 +206,43 @@ module.exports.getAllPayement = (req, res) => {
          }
          return res.json(allPay)
      })
+}
+
+module.exports.getById = (req, res) => {
+    Pay.findOne({
+        "_id": req.params.id
+    }, (err, pay) => {
+        if (!pay) {
+            res.status(404)
+            res.json({
+                err: "No payement found :("
+            })
+        }
+
+        if (err) {
+            res.status(500)
+            return res.json({
+                err: "An unexpect error happened"
+            })
+        }
+
+        const cartLength = pay.cart.length;
+        let newCart = []
+        let i = 0;
+        for(const item of pay.cart){
+            Product.findById(item.id, (err, product) => {
+                ++i
+                newCart.push({
+                    product,
+                    quantity: item.quantity
+                })
+                if(i == cartLength){
+                    res.status(202)
+                    return res.json({
+                        cart: newCart
+                    })
+                }
+            })
+        }
+    })
 }

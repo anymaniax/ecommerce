@@ -1,28 +1,33 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
+import FlipMove from 'react-flip-move'
 
 import {fetchAll, deleteProduct} from '../../actions'
 
 import {formater} from '../../models/priceFormater'
 
-const ProductItem = ({data, deleteP}) => {
-    console.log(data)
-    return (
-        <div className="card col-md-3" style={{margin: "5px"}}>
-            <p className="lead">{data.nom}</p>
-            <p className="text-muted">Prix: {formater(data.price.value)}€</p>
-            <div className="btn-group">
-                <Link to={`/admin/products/update/${data._id}`}className="btn btn-secondary"><i className="fa fa-pencil" aria-hidden="true"></i></Link>
-                <button
-                    onClick={() => deleteP(data._id)}
-                    className="btn btn-secondary">
-                    <i className="fa fa-trash" aria-hidden="true"></i>
-                </button>
-                <Link to={`/products/${data._id}`} className="btn btn-secondary"><i className="fa fa-link" aria-hidden="true"></i></Link>
+class ProductItem extends React.Component {
+    render(){
+        const {data, deleteP} = this.props
+        return (
+            <div className="card col-md-3" style={{margin: "5px"}} key={data._id}>
+                <p className="lead">{data.nom}</p>
+                <p className="text-muted">Prix: {formater(data.price.value)}€</p>
+                <div className="btn-group">
+                    <Link to={`/admin/products/update/${data._id}`} className="btn btn-secondary"><i
+                        className="fa fa-pencil" aria-hidden="true"></i></Link>
+                    <button
+                        onClick={() => deleteP(data._id)}
+                        className="btn btn-secondary">
+                        <i className="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    <Link to={`/products/${data._id}`} className="btn btn-secondary"><i className="fa fa-link"
+                                                                                        aria-hidden="true"></i></Link>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 class ProductHandler extends Component {
@@ -44,12 +49,18 @@ class ProductHandler extends Component {
                         <i className="fa fa-plus" aria-hidden="true"></i>
                     </Link>
                 </div>
-                {products.map(e =>
-                    <ProductItem
-                        deleteP={(id) => {
-                            deleteP(id, token)
-                        }}
-                        data={e}/>)}
+
+                <FlipMove
+                    staggerDurationBy="30"
+                    duration={250}
+                    easing="linear">
+                    {products.map(e =>
+                        <ProductItem
+                            deleteP={(id) => {
+                                deleteP(id, token)
+                            }}
+                            data={e}/>)}
+                </FlipMove>
             </div>
         )
     }

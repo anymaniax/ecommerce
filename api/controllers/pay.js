@@ -1,4 +1,4 @@
-var Paypal = require('paypal-express-checkout');
+var Paypal = require('paypal-express-checkout')
 require('../models/db')
 
 let Transaction = require('../models/transaction')

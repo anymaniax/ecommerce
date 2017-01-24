@@ -19,7 +19,9 @@ export {RECEIVE_PRODUCTS,
 		deleteProduct,
     	updateProduct,
 		PRODUCT_UPDATE_FAILURE,
-		PRODUCT_UPDATE_SUCCESS} from './apiActions'
+		PRODUCT_UPDATE_SUCCESS,
+    	fetchPayements,
+    	PAYEMENTS_RECEIVED} from './apiActions'
 
 export {SEARCH_PRODUCTS_SUCCESS,
 		SEARCH_PRODUCTS_FAILURE,

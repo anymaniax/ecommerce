@@ -195,6 +195,7 @@ module.exports.getByUserPayement = (req, res) => {
     Pay.find({
         "userId": req.params.id
     }, (err, pay) => {
+        console.log('PAYYYYYY\n', pay)
         if (!pay) {
             res.status(404)
             res.json({
@@ -216,6 +217,8 @@ module.exports.getByUserPayement = (req, res) => {
             }
             allPay.push(ByPay)
         }
+        console.log(allPay)
+        res.status(202)
         return res.json(allPay)
     })
 }
@@ -235,7 +238,7 @@ module.exports.getAllPayement = (req, res) => {
                  err: "An unexpect error happened"
              })
          }
-         console.log(pay);
+
          let allPay = []
          for (let p of pay) {
              let ByPay = {
@@ -244,6 +247,7 @@ module.exports.getAllPayement = (req, res) => {
              }
              allPay.push(ByPay)
          }
+         res.status(202)
          return res.json(allPay)
      })
 }

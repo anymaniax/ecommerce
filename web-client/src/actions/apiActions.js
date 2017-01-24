@@ -116,3 +116,30 @@ export function fetchProductsByCat(cat){
 			.then(products => dispatch(receiveProducts(products)))
 	}
 }
+
+export const PAYEMENTS_RECEIVED = 'payements received'
+export function receivedPayements(payements){
+	return {
+		type: PAYEMENTS_RECEIVED,
+        payements
+	}
+}
+
+export function fetchPayements(id, token){
+	return function(dispatch){
+		return fetch(`${conf.url}pay/payements/user/${id}`, {
+			method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }
+		}).then(response => {
+			if(response.status === 202){
+				response.json().then(json => {
+					dispatch(receivedPayements(json))
+				})
+			}
+		})
+	}
+}

@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 
 import {_successCheckout} from '../../components'
 
-import {getTransactionDetails} from '../../actions'
+import {getTransactionDetails, resetCart} from '../../actions'
 
 const mapStateToProps = ({auth, checkout}) => {
     const {token} = auth
@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchDetails: (transactionId, token) => {
             dispatch(getTransactionDetails(transactionId, token))
+            dispatch(resetCart())
         }
     }
 }

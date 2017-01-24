@@ -29,7 +29,8 @@ const Item = (props) => {
 						<button onClick={() => props.add(props.product)} type="button" className="btn btn-secondary">
 							<i className="fa fa-plus"></i>
 						</button>
-						<button onClick={() => props.remove(props.cartId, props.quantity)} type="button" className="btn btn-secondary">
+						<button onClick={() => props.remove(props.cartId, props.quantity)} type="button"
+								className="btn btn-secondary">
 							<i className="fa fa-trash"></i>
 						</button>
 					</div>
@@ -56,9 +57,15 @@ const _cart = (props) => {
 		<div>
 			<h2 className="text-xs-right display-4">Total: {price}€</h2>
 			{productsMarkup}
-			<button onClick={() => props.reset()} className="btn btn-warning btn-lg btn-block">Vider le Panier{' '}<i className="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+            {price != 0 &&
+			<div>
+				<button onClick={() => props.reset()} className="btn btn-warning btn-lg btn-block">Vider le
+					Panier{' '}<i className="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
 
-			<Link to='/checkout' className="btn btn-primary btn-lg btn-block">Procéder au payement{' '}<i className="fa fa-credit-card" aria-hidden="true"></i></Link>
+				<Link to='/checkout' className="btn btn-primary btn-lg btn-block">Procéder au payement{' '}<i
+					className="fa fa-credit-card" aria-hidden="true"></i></Link>
+			</div>
+            }
 		</div>
 	)
 }

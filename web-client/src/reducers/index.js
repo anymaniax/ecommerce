@@ -9,6 +9,7 @@ import admin from './adminReducer'
 import passwordUpdate from './passwordUpdateReducer'
 import productUpdate from './productUpdateReducer'
 import checkout from './CheckoutReducer'
+import payements from './payementsReducer'
 
 const reducers = combineReducers({
 	cart,
@@ -19,7 +20,8 @@ const reducers = combineReducers({
 	admin,
 	passwordUpdate,
     productUpdate,
-	checkout
+	checkout,
+    payements
 })
 
 export default reducers

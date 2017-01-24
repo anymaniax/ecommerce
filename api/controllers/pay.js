@@ -9,68 +9,76 @@ module.exports.pay = (req, res) => {
     let price = 0
     let i = 0;
     let desc = "";
-    if (req.params.id) {
-        for (let prod of cart) {
-            Product.findById(prod.id, (err, product) => {
-                if (err) {
-                    let index = cart.indexOf(prod)
-                    if (index > -1) {
-                        cart.splice(index, 1)
+    if (cart) {
+        if (req.params.id) {
+            for (let prod of cart) {
+                Product.findById(prod.id, (err, product) => {
+                    if (err) {
+                        console.log(err)
                     }
-                }
 
-                if (product) {
-                    price += product.price.value * prod.quantity
-                    if (i != cart.length - 1) {
-                        desc += product.nom + " - " + product.price.value + "€" + " x" + prod.quantity + " + "
+                    if (product) {
+                        price += product.price.value * prod.quantity
+                        if (i != cart.length - 1) {
+                            desc += product.nom + " - " + product.price.value + "€" + " x" + prod.quantity + " + "
+                        } else {
+                            desc += product.nom + " - " + product.price.value + "€" + " x" + prod.quantity
+                        }
+                        i++
                     } else {
-                        desc += product.nom + " - " + product.price.value + "€" + " x" + prod.quantity
+                        let index = cart.indexOf(prod)
+                        if (index > -1) {
+                            cart.splice(index, 1)
+                        }
                     }
-                    i++
-                }
 
-                if (i == cart.length) {
-                    if (price == 0) {
-                        return res.json({
-                            error: "Could not create this transaction"
-                        })
-                    } else {
-                        let transaction = Transaction({
-                            "amount": price,
-                            "cart": cart,
-                            "userId": req.params.id
-                        })
-                        transaction.save((err, pay) => {
-                            if (err) {
-                                res.status(406)
-                                console.log(err)
-                                return res.json({
-                                    error: "Could not create this transaction"
-                                })
-                            }
-                            let paypal = Paypal.init(InfoPaypal.username, InfoPaypal.password, InfoPaypal.signature, 'http://localhost:5000/api/v1/pay/valid/' + transaction._id, 'http://localhost:5000/api/v1/pay/valid/' + transaction._id, true);
-                            paypal.pay(transaction._id, transaction.amount, desc, 'EUR', true, function (err, url) {
+                    if (i == cart.length) {
+                        if (price == 0) {
+                            return res.json({
+                                error: "Could not create this transaction"
+                            })
+                        } else {
+                            let transaction = Transaction({
+                                "amount": price,
+                                "cart": cart,
+                                "userId": req.params.id
+                            })
+                            transaction.save((err, pay) => {
                                 if (err) {
+                                    res.status(406)
                                     console.log(err)
-                                    res.json({
-                                        success: false,
-                                        message: 'Payement failed.'
+                                    return res.json({
+                                        error: "Could not create this transaction"
                                     })
                                 }
+                                let paypal = Paypal.init(InfoPaypal.username, InfoPaypal.password, InfoPaypal.signature, 'http://localhost:5000/api/v1/pay/valid/' + transaction._id, 'http://localhost:5000/api/v1/pay/valid/' + transaction._id, true);
+                                paypal.pay(transaction._id, transaction.amount, desc, 'EUR', true, function (err, url) {
+                                    if (err) {
+                                        console.log(err)
+                                        res.json({
+                                            success: false,
+                                            message: 'Payement failed.'
+                                        })
+                                    }
 
-                                res.json({
-                                    success: true,
-                                    url: url
+                                    res.json({
+                                        success: true,
+                                        url: url
+                                    })
                                 })
                             })
-                        })
+                        }
                     }
-                }
+                })
+            }
+        } else {
+            res.status(406)
+            return res.json({
+                error: "Could not create this transaction"
             })
         }
     } else {
         res.status(406)
-        console.log(err)
         return res.json({
             error: "Could not create this transaction"
         })
@@ -175,9 +183,9 @@ module.exports.getById = (req, res) => {
             })
         }
 
-        let ByPay= {
-               cart: pay.cart
-            }
+        let ByPay = {
+            cart: pay.cart
+        }
         return res.json(ByPay)
     })
 }

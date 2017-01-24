@@ -67,7 +67,6 @@ module.exports.getById = (req, res) => {
                 },
                 role: user.role
             }
-            console.log(ByUser);
             return res.json(ByUser)
         }
 

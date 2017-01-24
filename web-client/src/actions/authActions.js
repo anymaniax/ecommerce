@@ -160,7 +160,7 @@ export function addressUpdateFailure(){
 	}
 }
 
-export function changeAddress(id, street, number, town, postalCode, country, token){
+export function changeAddress(id, lastname, firstname, street, number, town, postalCode, country, sex, phone, token){
 	return function(dispatch){
 		dispatch(startLoading())
 		return fetch(`${conf.url}users/${id}`, {
@@ -170,15 +170,21 @@ export function changeAddress(id, street, number, town, postalCode, country, tok
                 'Content-Type': 'application/json',
 				'x-access-token': token
             }, body: JSON.stringify({
-            	street,
-				number,
-				town,
-				postalCode,
-				country,
+				lastname,
+				firstname,
+				address:{
+					street,
+					number,
+					town,
+					postalCode,
+					country,
+				},
+				sex,
+				phone,
 				token
 			})
 		}).then(response => {
-			if(response.status === 204){
+			if(response.status === 200){
 				dispatch(addressUpdateSuccess())
 				dispatch(finishLoading())
 			} else {

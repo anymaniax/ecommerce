@@ -7,6 +7,7 @@ import auth from './authReducer'
 import search from './searchReducer'
 import admin from './adminReducer'
 import passwordUpdate from './passwordUpdateReducer'
+import addressUpdate from './addressUpdateReducer'
 import productUpdate from './productUpdateReducer'
 
 const reducers = combineReducers({
@@ -17,6 +18,7 @@ const reducers = combineReducers({
 	auth,
 	admin,
 	passwordUpdate,
+	addressUpdate,
     productUpdate
 })
 

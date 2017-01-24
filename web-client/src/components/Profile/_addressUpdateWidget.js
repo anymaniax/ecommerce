@@ -12,11 +12,11 @@ class _addressUpdateWidget extends Component {
     constructor(props){
         super(props)
         this.state = {
-            street: '',
-            number: '',
-            town: '',
-            postalCode:'',
-            country:'',
+            street: this.props.user.address.street,
+            number: this.props.user.address.number,
+            town: this.props.user.address.town,
+            postalCode:this.props.user.address.postalCode,
+            country:this.props.user.address.country,
             errorShort: '',
             errorDetails: '',
             error: false
@@ -65,12 +65,13 @@ class _addressUpdateWidget extends Component {
             return this.props.showAlert('Oops !', 'Tous les champs doivent être remplis!', 'warning')
         }
 
-        return this.props.changeAddress(_id, street, number, town, postalCode, country, token)
+        return this.props.changeAddress(_id, this.props.user.lastname, this.props.user.firstname ,street, number, town, postalCode, country, this.props.user.sex, this.props.user.phone, token)
     }
 
     render() {
+        console.log(this);
         const {street, number, town, postalCode, country} = this.state
-        const {shouldDisplayAlert, shouldDisplayLoader, alertShort, alertDetails, alertType} = this.props.passwordUpdate
+        const {shouldDisplayAlert, shouldDisplayLoader, alertShort, alertDetails, alertType} = this.props.addressUpdate
         return (
             <div>
                 <p className="lead">Changer adresse</p>

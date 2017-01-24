@@ -2,7 +2,7 @@ import React from 'react'
 import Badge from './_badge'
 import NameDisplay from './_nameDisplay'
 import Address from './_address'
-import {PasswordWidget} from '../../containers'
+import {PasswordWidget, AddressWidget} from '../../containers'
 
 
 
@@ -32,6 +32,11 @@ const _profile = ({user}) => {
                 <div className="col-md-9">
                     <NameDisplay username={user.username} firstname={user.firstname} lastname={user.lastname}/>
                     <Address address={user.address}/>
+                </div>
+            </div>
+            <div className="row jumbotron">
+                <div className=" col-md-12">
+                    <AddressWidget />
                 </div>
             </div>
             <div className="row jumbotron">

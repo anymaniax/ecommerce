@@ -33,7 +33,7 @@ module.exports.pay = (req, res) => {
                     let transaction = Transaction({
                         "amount": price,
                         "cart": cart,
-                        "userId": req.body.id
+                        "userId": req.params.id
                     })
                     transaction.save((err, pay) => {
                         if (err) {

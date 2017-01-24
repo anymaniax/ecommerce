@@ -146,6 +146,49 @@ export function changePassword(id, password, newPassword, token){
 	}
 }
 
+export const ADDRESS_UPDATE_SUCCESSS = 'address update success'
+export function addressUpdateSuccess(){
+	return {
+		type: ADDRESS_UPDATE_SUCCESSS
+	}
+}
+
+export const ADDRESS_UPDATE_FAILURE = 'address update failure'
+export function addressUpdateFailure(){
+	return {
+		type: ADDRESS_UPDATE_FAILURE
+	}
+}
+
+export function changeAddress(id, street, number, town, postalCode, country, token){
+	return function(dispatch){
+		dispatch(startLoading())
+		return fetch(`${conf.url}users/${id}`, {
+			method: 'PUT',
+			headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'x-access-token': token
+            }, body: JSON.stringify({
+            	street,
+				number,
+				town,
+				postalCode,
+				country,
+				token
+			})
+		}).then(response => {
+			if(response.status === 204){
+				dispatch(addressUpdateSuccess())
+				dispatch(finishLoading())
+			} else {
+				dispatch(addressUpdateFailure())
+                dispatch(finishLoading())
+			}
+		})
+	}
+}
+
 export const HIDE_ALERT = 'hide alert'
 export function hideAlert(){
 	return {

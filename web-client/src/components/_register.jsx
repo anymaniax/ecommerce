@@ -256,7 +256,7 @@ class _register extends Component {
 							className="form-control"
 							type="text"
 							placeholder="Pays..."
-							value={this.state.address.town}
+							value={this.state.address.country}
 							onChange={(e) => this.handleInputs(e, "country")} />
 						<label>
 							Password

@@ -15,10 +15,10 @@ class _register extends Component {
 			passwordCheck: '',
 			email: '',
 			address: {
-				street: 'Rue d\'Olez',
-				number: 27,
+				street: '',
+				number: "",
 				town: 'Mons',
-				postalCode: 7000,
+				postalCode: '',
 				country: 'Belgium'
 			},
 			errorMessage: [],
@@ -256,7 +256,7 @@ class _register extends Component {
 							className="form-control"
 							type="text"
 							placeholder="Pays..."
-							value={this.state.address.town}
+							value={this.state.address.country}
 							onChange={(e) => this.handleInputs(e, "country")} />
 						<label>
 							Password

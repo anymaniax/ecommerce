@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link, browserHistory} from 'react-router'
 
 import {Loader} from './_loader'
+import {Alert} from './'
 
 export default class _loginPage extends Component {
 
@@ -48,6 +49,7 @@ export default class _loginPage extends Component {
 	}
 
 	render(){
+		console.log(this.props)
 		return (
 			<div>
 				<form>
@@ -58,6 +60,12 @@ export default class _loginPage extends Component {
 								<p><input className="form-control" value={this.state.login} onChange={this.handleLogin} type="text" placeholder="login" /></p>
 								<p><input className="form-control" value={this.state.password} onChange={this.handlePass} type="password" placeholder="password" /></p>
 								<p><button className="span-button form-control" onClick={this.login}>Se connecter{' '}<i className="fa fa-sign-in" aria-hidden="true"></i></button></p>
+								{this.props.errorMessage &&
+									<Alert
+										short="Oops!"
+										details={this.props.errorMessage}
+										type="danger" />
+								}
 								<p><Link to='/register'>Pas encore inscrit?</Link></p>
 							</div>
 							:

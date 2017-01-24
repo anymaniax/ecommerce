@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 
-import {confirmAndCreatePaypalCart} from '../../actions'
+import {confirmAndCreatePaypalCart, showAlert} from '../../actions'
 
 import {_confirmation} from '../../components'
 
@@ -18,6 +18,7 @@ const mapStateToProps = ({cart, auth, checkout}) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         confirm: (cart, uid, token) => {
+            dispatch(showAlert())
             dispatch(confirmAndCreatePaypalCart(cart, uid, token))
         }
     }

@@ -11,11 +11,11 @@ class ProductListItem extends React.Component {
 				<img role="presentation" className="card-img-top" src={product.thumbnail} height="100px"/> 
 				<div className="card-block">
 					<h3 className="card-title">{product.nom} - {formater(product.price.value)}€</h3>
-					<p>
+					<div className="btn-group">
 						<Link className="btn btn-primary" to={`/products/${product._id}`}>Détails</Link>
-						<span className="btn btn-primary" onClick={() => this.props.addToCart()}>Ajouter au panier</span>
+						<span className="btn btn-success" onClick={() => this.props.addToCart()}>Ajouter au panier</span>
 						{this.props.admin && <span className="btn btn-danger" onClick={() => this.props.delete()}>Supprimer</span>}
-					</p> 
+					</div>
 				</div>
 			</div>
 		)

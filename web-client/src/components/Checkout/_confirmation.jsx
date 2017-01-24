@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 
 import {Loader} from '../_loader'
+import {Alert} from '../'
 
 import {formater} from '../../models/priceFormater'
 
@@ -16,7 +17,6 @@ class _confirmation extends Component {
     }
     render() {
         const {props} = this
-        console.log(props.cart)
         return (
             <div>
                 <h1>Veuillez confirmer votre commande</h1>
@@ -42,6 +42,13 @@ class _confirmation extends Component {
                     </div>
                     :
                     <Loader/>
+                }
+                {props.checkout.shouldDisplayAlert &&
+                <Alert
+                    short="Yes!"
+                    details="Vous allez être redirigé sur paypal"
+                    type="info"
+                />
                 }
             </div>
         )

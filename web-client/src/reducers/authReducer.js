@@ -24,7 +24,7 @@ function auth(state = initialState, action){
 		case LOGIN_FAILURE:
 			return Object.assign({}, state, {
 				authenticated: false,
-				errorMessage: action.message
+				errorMessage: "Une erreur est survenue durant l'authentification"
 			})
 
 		case REGISTER_SUCCESS:

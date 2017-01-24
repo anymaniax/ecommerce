@@ -30,35 +30,41 @@ module.exports.pay = (req, res) => {
                 }
 
                 if (i == cart.length) {
-                    let transaction = Transaction({
-                        "amount": price,
-                        "cart": cart,
-                        "userId": req.params.id
-                    })
-                    transaction.save((err, pay) => {
-                        if (err) {
-                            res.status(406)
-                            console.log(err)
-                            return res.json({
-                                error: "Could not create this transaction"
-                            })
-                        }
-                        let paypal = Paypal.init(InfoPaypal.username, InfoPaypal.password, InfoPaypal.signature, 'http://localhost:5000/api/v1/pay/valid/' + transaction._id, 'http://localhost:5000/api/v1/pay/valid/' + transaction._id, true);
-                        paypal.pay(transaction._id, transaction.amount, desc, 'EUR', true, function (err, url) {
+                    if (price == 0) {
+                        return res.json({
+                            error: "Could not create this transaction"
+                        })
+                    } else {
+                        let transaction = Transaction({
+                            "amount": price,
+                            "cart": cart,
+                            "userId": req.params.id
+                        })
+                        transaction.save((err, pay) => {
                             if (err) {
+                                res.status(406)
                                 console.log(err)
-                                res.json({
-                                    success: false,
-                                    message: 'Payement failed.'
+                                return res.json({
+                                    error: "Could not create this transaction"
                                 })
                             }
+                            let paypal = Paypal.init(InfoPaypal.username, InfoPaypal.password, InfoPaypal.signature, 'http://localhost:5000/api/v1/pay/valid/' + transaction._id, 'http://localhost:5000/api/v1/pay/valid/' + transaction._id, true);
+                            paypal.pay(transaction._id, transaction.amount, desc, 'EUR', true, function (err, url) {
+                                if (err) {
+                                    console.log(err)
+                                    res.json({
+                                        success: false,
+                                        message: 'Payement failed.'
+                                    })
+                                }
 
-                            res.json({
-                                success: true,
-                                url: url
+                                res.json({
+                                    success: true,
+                                    url: url
+                                })
                             })
                         })
-                    })
+                    }
                 }
             })
         }
@@ -182,28 +188,28 @@ module.exports.getByIdPayement = (req, res) => {
 
 module.exports.getAllPayement = (req, res) => {
     Pay.find((err, pay) => {
-         if (!pay) {
-             res.status(404)
-             res.json({
-                 err: "No payement found :("
-             })
-         }
+        if (!pay) {
+            res.status(404)
+            res.json({
+                err: "No payement found :("
+            })
+        }
 
-         if (err) {
-             res.status(500)
-             return res.json({
-                 err: "An unexpect error happened"
-             })
-         }
-         console.log(pay);
-         let allPay = []
-         for (let p of pay) {
-             let ByPay = {
-                 _id: p._id,
-                 cart: p.cart
-             }
-             allPay.push(ByPay)
-         }
-         return res.json(allPay)
-     })
+        if (err) {
+            res.status(500)
+            return res.json({
+                err: "An unexpect error happened"
+            })
+        }
+        console.log(pay);
+        let allPay = []
+        for (let p of pay) {
+            let ByPay = {
+                _id: p._id,
+                cart: p.cart
+            }
+            allPay.push(ByPay)
+        }
+        return res.json(allPay)
+    })
 }

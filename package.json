@@ -16,7 +16,7 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "start": "node app.js",
+    "start": "docker-compose build && docker-compose up -d && cd ./web-client && yarn start",
     "test": "docker-compose -f docker-compose.debug.yml up -d && DEBUG=1 nodemon api/index"
   }
 }

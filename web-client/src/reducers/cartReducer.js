@@ -10,7 +10,7 @@ export function cartReducer(state = initialState, action){
 	switch(action.type){
 		case ADD_TO_CART:{
 			let newState = [...state.items]
-			const currentPos = newState.map(e => e.product._id).indexOf(action.product._id)
+ 			const currentPos = newState.map(e => e.product._id).indexOf(action.product._id)
 			if(currentPos > -1){
 				newState[currentPos].quantity += action.quantity
 			} else {

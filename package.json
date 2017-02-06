@@ -17,6 +17,7 @@
   "license": "MIT",
   "scripts": {
     "start": "docker-compose build && docker-compose up -d && cd ./web-client && yarn start",
-    "test": "docker-compose -f docker-compose.debug.yml up -d && DEBUG=1 nodemon api/index"
+    "test": "docker-compose -f docker-compose.debug.yml up -d && DEBUG=1 nodemon api/index",
+    "prod":"docker-compose build && docker-compose up"
   }
 }
